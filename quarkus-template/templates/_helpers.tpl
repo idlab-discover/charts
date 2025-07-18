@@ -92,7 +92,7 @@ The image reference for the Quarkus application
 - name: QUARKUS_KEYCLOAK_ADMIN_CLIENT_ENABLED
   value: {{ .Values.keycloakAdmin.enabled | quote }}
 - name: QUARKUS_KEYCLOAK_ADMIN_CLIENT_SERVER_URL
-  value: {{ .Values.global.oidc.authServerUrl | quote }}
+  value: {{ .Values.global.keycloakAdmin.serverUrl | quote }}
 - name: QUARKUS_KEYCLOAK_ADMIN_CLIENT_GRANT_TYPE
   value: "password"
 - name: QUARKUS_KEYCLOAK_ADMIN_CLIENT_REALM

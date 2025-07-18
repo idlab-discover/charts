@@ -27,6 +27,8 @@ global:
   quarkus:
     httpPort: 8080
     metricsPort: ""
+    logging:
+      level: INFO
 
   truststore: {}
 
