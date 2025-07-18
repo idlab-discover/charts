@@ -51,6 +51,7 @@ global:
     passwordSecretKey: ""
   openfga:
     url: ""
+    storeId: ""
     applicationYaml: {}
   minio:
     host: ""
