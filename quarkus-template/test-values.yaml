@@ -13,6 +13,10 @@ global:
     httpGet:
       path: /q/health/live
       port: metrics
+  openfga:
+    enabled: true
+    url: "https://openfga.example.org"
+    storeId: "default-store"
 ingressRoutes:
   enabled: true
   routes:
@@ -22,3 +26,5 @@ ingressRoutes:
     - match: "PathPrefix(`/[^/]+/slices`)"
       middlewares:
         - name: StripPrefix
+openfga:
+  enabled: true

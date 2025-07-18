@@ -106,7 +106,7 @@ spec:
             secretName: {{ .Values.global.truststore.secretName }}
             items:
             - key: oidc-truststore.p12 # The key used when creating the secret
-              path: truststore.p12 
+              path: truststore.p12
         {{- end }}
 {{/*        {{- toYaml .Values.volumes | nindent 8 }}*/}}
       {{- with .Values.nodeSelector }}
