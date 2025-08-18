@@ -5,6 +5,8 @@ metadata:
   name: "{{ include "quarkus-template.fullname" . }}-{{ .Release.Revision }}"
   labels:
     {{- include "quarkus-template.labels" . | nindent 4 }}
+    helm.sh/hook: pre-upgrade
+    helm.sh/hook-delete-policy: hook-failed
 spec:
   template:
     metadata:
