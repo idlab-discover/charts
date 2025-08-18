@@ -62,7 +62,7 @@ The image reference for the Quarkus application
 
 {{- define "quarkus-template.oidc.envConfig" -}}
 - name: QUARKUS_OIDC_AUTH_SERVER_URL
-  value: {{ .Values.global.oidc.authServerUrl | quote }}
+  value: {{ .Values.oidc.authServerUrl | default .Values.global.oidc.authServerUrl | quote }}
 {{- if and .Values.global.oidc.existingSecret .Values.global.oidc.clientIdSecretKey }}
 - name: QUARKUS_OIDC_CLIENT_ID
   valueFrom:
