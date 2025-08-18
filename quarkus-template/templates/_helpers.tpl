@@ -170,7 +170,13 @@ The image reference for the Quarkus application
 {{- define "quarkus-template.openfga.envConfig" -}}
 - name: QUARKUS_OPENFGA_URL
   value: {{ .Values.global.openfga.url | quote }}
-{{- if .Values.global.openfga.storeId }}
+{{- if and .Values.global.openfga.existingSecret .Values.global.openfga.storeIdSecretKey }}
+- name: QUARKUS_OPENFGA_STORE
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Values.global.openfga.existingSecret }}
+      key: {{ .Values.global.openfga.storeIdSecretKey }}
+{{- else if .Values.global.openfga.storeId }}
 - name: QUARKUS_OPENFGA_STORE
   value: {{ .Values.global.openfga.storeId | quote }}
 {{- end }}
