@@ -1,0 +1,61 @@
+{{ template "chart.header" . }}
+
+{{ template "chart.description" . }}
+
+## TL;DR
+
+```bash
+helm repo add discover https://idlab-discover.github.io/charts/
+helm install quarkus-template dscover/quarkus-template
+```
+
+## Introduction
+
+This chart provides a template for deploying Quarkus applications on Kubernetes using Helm. It includes configurations for common services such as OpenFGA and MinIO.
+
+### Features
+
+- Configurable OpenFGA integration
+- MinIO object storage support
+- Health checks and readiness probes
+- Ingress routes for HTTP traffic
+- Customizable environment variables
+- Support for application YAML configurations
+- StripPrefix middleware for Ingress routes
+- Support for custom labels and annotations
+- Configurable resource requests and limits
+
+## Prerequisites
+
+- Kubernetes 1.12+
+- Helm 3.2.0+
+
+## Installing the Chart
+
+To install the chart with the release name `my-release`:
+
+```bash
+helm install my-release discover/quarkus-template
+```
+
+The command deploys a Quarkus application on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
+
+## Uninstalling the Chart
+
+To uninstall/delete the `my-release` deployment:
+
+```bash
+helm delete my-release
+```
+
+The command removes all the Kubernetes components associated with the chart and deletes the release.
+
+{{ template "chart.requirementsSection" . }}
+
+{{ template "chart.valuesSection" . }}
+
+{{ template "chart.sourcesSection" . }}
+
+{{ template "chart.maintainersSection" . }}
+
+{{ template "chart.licenseSection" . }}

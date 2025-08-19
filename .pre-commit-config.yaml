@@ -1,0 +1,19 @@
+repos:
+  - repo: https://github.com/norwoodj/helm-docs
+    rev: v1.14.2
+    hooks:
+      - id: helm-docs
+        args:
+          - --chart-search-root=./
+          - --template-files=README.md.gotmpl
+  - repo: https://github.com/dadav/helm-schema
+    rev: 0.18.1
+    hooks:
+      - id: helm-schema
+        args:
+          - --chart-search-root=./
+          # don't analyze dependencies
+          - --no-dependencies
+          # add references to values file if not exist
+          - --add-schema-reference
+          - --helm-docs-compatibility-mode

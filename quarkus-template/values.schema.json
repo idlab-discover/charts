@@ -1,0 +1,987 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "properties": {
+    "affinity": {
+      "additionalProperties": false,
+      "description": "Affinity configuration.",
+      "required": [],
+      "title": "affinity",
+      "type": "object"
+    },
+    "applicationProperties": {
+      "default": "",
+      "description": "Additional application.properties entries",
+      "required": [],
+      "title": "applicationProperties",
+      "type": "string"
+    },
+    "applicationYaml": {
+      "additionalProperties": false,
+      "description": "Additional application.yaml entries",
+      "required": [],
+      "title": "applicationYaml",
+      "type": "object"
+    },
+    "autoscaling": {
+      "additionalProperties": false,
+      "description": " title: Autoscaling Settings @schema",
+      "properties": {
+        "enabled": {
+          "default": false,
+          "description": "Enable autoscaling",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "maxReplicas": {
+          "default": 100,
+          "description": "Maximum number of replicas",
+          "required": [],
+          "title": "maxReplicas",
+          "type": "integer"
+        },
+        "minReplicas": {
+          "default": 1,
+          "description": "Minimum number of replicas",
+          "required": [],
+          "title": "minReplicas",
+          "type": "integer"
+        },
+        "targetCPUUtilizationPercentage": {
+          "default": 80,
+          "description": "Target CPU utilization percentage",
+          "required": [],
+          "title": "targetCPUUtilizationPercentage",
+          "type": "integer"
+        }
+      },
+      "required": [],
+      "title": "Autoscaling Settings"
+    },
+    "clickhouse": {
+      "additionalProperties": false,
+      "description": " title: Clickhouse Settings @schema",
+      "properties": {
+        "enabled": {
+          "default": false,
+          "description": "Enable Clickhouse client",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [],
+      "title": "Clickhouse Settings"
+    },
+    "deploymentStrategy": {
+      "additionalProperties": false,
+      "description": "Deployment strategy.",
+      "required": [],
+      "title": "deploymentStrategy",
+      "type": "object"
+    },
+    "env": {
+      "description": "Additional environment variables.",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "env",
+      "type": "array"
+    },
+    "fullnameOverride": {
+      "default": "",
+      "description": "Override the full name of the chart.",
+      "required": [],
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "additionalProperties": false,
+      "description": " title: Global Settings type: object @schema",
+      "properties": {
+        "applicationYaml": {
+          "additionalProperties": false,
+          "description": " title: Application YAML type: object @schema",
+          "required": [],
+          "title": "Application YAML",
+          "type": "object"
+        },
+        "clickhouse": {
+          "additionalProperties": false,
+          "description": " title: Clickhouse Settings type: object @schema",
+          "properties": {
+            "applicationYaml": {
+              "additionalProperties": false,
+              "description": " title: Application YAML type: object @schema",
+              "required": [],
+              "title": "Application YAML",
+              "type": "object"
+            },
+            "host": {
+              "default": "",
+              "description": "Clickhouse host",
+              "required": [],
+              "title": "host",
+              "type": "string"
+            },
+            "port": {
+              "default": "",
+              "description": "Clickhouse port",
+              "required": [],
+              "title": "port",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "Clickhouse Settings",
+          "type": "object"
+        },
+        "deploymentStrategy": {
+          "additionalProperties": false,
+          "description": " title: Deployment Strategy type: object @schema",
+          "required": [],
+          "title": "Deployment Strategy",
+          "type": "object"
+        },
+        "env": {
+          "description": "Global environment variables",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "Environment Variables",
+          "type": "array"
+        },
+        "host": {
+          "default": "",
+          "description": "Hostname for the ingress",
+          "required": [],
+          "title": "host",
+          "type": "string"
+        },
+        "image": {
+          "additionalProperties": false,
+          "description": " title: Image Settings type: object @schema",
+          "properties": {
+            "pullPolicy": {
+              "default": "IfNotPresent",
+              "description": "Image pull policy",
+              "required": [],
+              "title": "pullPolicy",
+              "type": "string"
+            },
+            "registry": {
+              "default": "gitlab.ilabt.imec.be:4567/discover/packages",
+              "description": "Image registry",
+              "required": [],
+              "title": "registry",
+              "type": "string"
+            },
+            "tag": {
+              "default": "",
+              "description": "Image tag",
+              "required": [],
+              "title": "tag",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "Image Settings",
+          "type": "object"
+        },
+        "imagePullSecrets": {
+          "description": "Global image pull secrets",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "Image Pull Secrets",
+          "type": "array"
+        },
+        "ingressRoutes": {
+          "additionalProperties": false,
+          "description": " title: Ingress Route Settings type: object @schema",
+          "properties": {
+            "matchHost": {
+              "default": false,
+              "description": "Automatically create IngressRoute for the host",
+              "required": [],
+              "title": "matchHost",
+              "type": "boolean"
+            },
+            "proxy": {
+              "default": "none",
+              "description": "Proxy protocol for the IngressRoute",
+              "required": [],
+              "title": "proxy",
+              "type": "string"
+            },
+            "tlsEnabled": {
+              "default": false,
+              "description": "Enable TLS for the IngressRoute",
+              "required": [],
+              "title": "tlsEnabled",
+              "type": "boolean"
+            }
+          },
+          "required": [],
+          "title": "Ingress Route Settings",
+          "type": "object"
+        },
+        "kafka": {
+          "additionalProperties": false,
+          "description": " title: Kafka Settings type: object @schema",
+          "properties": {
+            "applicationYaml": {
+              "additionalProperties": false,
+              "description": " title: Application YAML type: object @schema",
+              "required": [],
+              "title": "Application YAML",
+              "type": "object"
+            },
+            "bootstrapServers": {
+              "default": "",
+              "description": "Kafka bootstrap servers",
+              "required": [],
+              "title": "bootstrapServers",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "Kafka Settings",
+          "type": "object"
+        },
+        "keycloakAdmin": {
+          "additionalProperties": false,
+          "description": " title: Keycloak Admin Settings type: object @schema",
+          "properties": {
+            "enabled": {
+              "default": false,
+              "description": "Enable Keycloak admin client",
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "existingSecret": {
+              "default": "",
+              "description": "Existing secret for Keycloak admin",
+              "required": [],
+              "title": "existingSecret",
+              "type": "string"
+            },
+            "password": {
+              "default": "",
+              "description": "Keycloak admin password",
+              "required": [],
+              "title": "password",
+              "type": "string"
+            },
+            "passwordSecretKey": {
+              "default": "",
+              "description": "Key for password in existing secret",
+              "required": [],
+              "title": "passwordSecretKey",
+              "type": "string"
+            },
+            "realm": {
+              "default": "",
+              "description": "Keycloak realm",
+              "required": [],
+              "title": "realm",
+              "type": "string"
+            },
+            "serverUrl": {
+              "default": "",
+              "description": "Keycloak server URL",
+              "required": [],
+              "title": "serverUrl",
+              "type": "string"
+            },
+            "username": {
+              "default": "",
+              "description": "Keycloak admin username",
+              "required": [],
+              "title": "username",
+              "type": "string"
+            },
+            "usernameSecretKey": {
+              "default": "",
+              "description": "Key for username in existing secret",
+              "required": [],
+              "title": "usernameSecretKey",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "Keycloak Admin Settings",
+          "type": "object"
+        },
+        "livenessProbe": {
+          "additionalProperties": false,
+          "description": " title: Liveness Probe type: object @schema",
+          "required": [],
+          "title": "Liveness Probe",
+          "type": "object"
+        },
+        "minio": {
+          "additionalProperties": false,
+          "description": " title: Minio Settings type: object @schema",
+          "properties": {
+            "accessKey": {
+              "default": "",
+              "description": "Minio access key",
+              "required": [],
+              "title": "accessKey",
+              "type": "string"
+            },
+            "accessKeySecretKey": {
+              "default": "",
+              "description": "Key for access key in existing secret",
+              "required": [],
+              "title": "accessKeySecretKey",
+              "type": "string"
+            },
+            "applicationYaml": {
+              "additionalProperties": false,
+              "description": " title: Application YAML type: object @schema",
+              "required": [],
+              "title": "Application YAML",
+              "type": "object"
+            },
+            "existingSecret": {
+              "default": "",
+              "description": "Existing secret for Minio",
+              "required": [],
+              "title": "existingSecret",
+              "type": "string"
+            },
+            "host": {
+              "default": "",
+              "description": "Minio host",
+              "required": [],
+              "title": "host",
+              "type": "string"
+            },
+            "port": {
+              "default": "",
+              "description": "Minio port",
+              "required": [],
+              "title": "port",
+              "type": "string"
+            },
+            "secretKey": {
+              "default": "",
+              "description": "Minio secret key",
+              "required": [],
+              "title": "secretKey",
+              "type": "string"
+            },
+            "secretKeySecretKey": {
+              "default": "",
+              "description": "Key for secret key in existing secret",
+              "required": [],
+              "title": "secretKeySecretKey",
+              "type": "string"
+            },
+            "secure": {
+              "default": true,
+              "description": "Use secure connection to Minio",
+              "required": [],
+              "title": "secure",
+              "type": "boolean"
+            },
+            "skipTlsVerify": {
+              "default": true,
+              "description": "Skip TLS verification for Minio",
+              "required": [],
+              "title": "skipTlsVerify",
+              "type": "boolean"
+            },
+            "useTls": {
+              "default": false,
+              "description": "Use TLS for Minio",
+              "required": [],
+              "title": "useTls",
+              "type": "boolean"
+            }
+          },
+          "required": [],
+          "title": "Minio Settings",
+          "type": "object"
+        },
+        "oidc": {
+          "additionalProperties": false,
+          "description": " title: OIDC Settings type: object @schema",
+          "properties": {
+            "applicationYaml": {
+              "additionalProperties": false,
+              "description": " title: Application YAML type: object @schema",
+              "required": [],
+              "title": "Application YAML",
+              "type": "object"
+            },
+            "authServerUrl": {
+              "default": "",
+              "description": "OIDC auth server URL",
+              "required": [],
+              "title": "authServerUrl",
+              "type": "string"
+            },
+            "clientId": {
+              "default": "",
+              "description": "OIDC client ID",
+              "required": [],
+              "title": "clientId",
+              "type": "string"
+            },
+            "clientIdSecretKey": {
+              "default": "client-id",
+              "description": "Key for client ID in existing secret",
+              "required": [],
+              "title": "clientIdSecretKey",
+              "type": "string"
+            },
+            "clientSecret": {
+              "default": "",
+              "description": "OIDC client secret",
+              "required": [],
+              "title": "clientSecret",
+              "type": "string"
+            },
+            "clientSecretSecretKey": {
+              "default": "client-secret",
+              "description": "Key for client secret in existing secret",
+              "required": [],
+              "title": "clientSecretSecretKey",
+              "type": "string"
+            },
+            "existingSecret": {
+              "default": "ewq",
+              "description": "Existing secret for OIDC",
+              "required": [],
+              "title": "existingSecret",
+              "type": "string"
+            },
+            "realm": {
+              "default": "",
+              "description": "OIDC realm",
+              "required": [],
+              "title": "realm",
+              "type": "string"
+            },
+            "realmSecretKey": {
+              "default": "",
+              "description": "Key for realm in existing secret",
+              "required": [],
+              "title": "realmSecretKey",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "OIDC Settings",
+          "type": "object"
+        },
+        "openfga": {
+          "additionalProperties": false,
+          "description": " title: OpenFGA Settings type: object @schema",
+          "properties": {
+            "applicationYaml": {
+              "additionalProperties": false,
+              "description": " title: Application YAML type: object @schema",
+              "required": [],
+              "title": "Application YAML",
+              "type": "object"
+            },
+            "existingSecret": {
+              "default": "",
+              "description": "Existing secret for OpenFGA",
+              "required": [],
+              "title": "existingSecret",
+              "type": "string"
+            },
+            "storeId": {
+              "default": "",
+              "description": "OpenFGA store ID",
+              "required": [],
+              "title": "storeId",
+              "type": "string"
+            },
+            "storeIdSecretKey": {
+              "default": "",
+              "description": "Key for store ID in existing secret",
+              "required": [],
+              "title": "storeIdSecretKey",
+              "type": "string"
+            },
+            "url": {
+              "default": "",
+              "description": "OpenFGA API URL",
+              "required": [],
+              "title": "url",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "OpenFGA Settings",
+          "type": "object"
+        },
+        "quarkus": {
+          "additionalProperties": false,
+          "description": " title: Quarkus Settings type: object @schema",
+          "properties": {
+            "httpPort": {
+              "default": 8080,
+              "description": "Quarkus HTTP port",
+              "required": [],
+              "title": "httpPort",
+              "type": "integer"
+            },
+            "logging": {
+              "additionalProperties": false,
+              "description": " title: Logging Settings type: object @schema",
+              "properties": {
+                "level": {
+                  "default": "INFO",
+                  "description": "Logging level",
+                  "required": [],
+                  "title": "level",
+                  "type": "string"
+                }
+              },
+              "required": [],
+              "title": "Logging Settings",
+              "type": "object"
+            },
+            "metricsPort": {
+              "default": "",
+              "description": "Quarkus metrics port",
+              "required": [],
+              "title": "metricsPort",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "Quarkus Settings",
+          "type": "object"
+        },
+        "readinessProbe": {
+          "additionalProperties": false,
+          "description": " title: Readiness Probe type: object @schema",
+          "required": [],
+          "title": "Readiness Probe",
+          "type": "object"
+        },
+        "truststore": {
+          "additionalProperties": false,
+          "description": " title: Truststore Settings type: object @schema",
+          "required": [],
+          "title": "Truststore Settings",
+          "type": "object"
+        }
+      },
+      "required": [],
+      "title": "Global Settings",
+      "type": "object"
+    },
+    "image": {
+      "default": "",
+      "description": " title: Image Settings @schema",
+      "required": [],
+      "title": "Image Settings"
+    },
+    "imagePullSecrets": {
+      "description": "Secrets for pulling images from a private repository.",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "imagePullSecrets",
+      "type": "array"
+    },
+    "ingress": {
+      "additionalProperties": false,
+      "description": " title: Ingress Settings @schema",
+      "properties": {
+        "annotations": {
+          "additionalProperties": false,
+          "description": "Annotations for the Ingress",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "className": {
+          "default": "",
+          "description": "Ingress class name",
+          "required": [],
+          "title": "className",
+          "type": "string"
+        },
+        "enabled": {
+          "default": false,
+          "description": "Enable Ingress",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "hosts": {
+          "description": "Hosts for the Ingress",
+          "items": {
+            "anyOf": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "host": {
+                    "default": "chart-example.local",
+                    "required": [],
+                    "title": "host",
+                    "type": "string"
+                  },
+                  "paths": {
+                    "items": {
+                      "anyOf": [
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "path": {
+                              "default": "/",
+                              "required": [],
+                              "title": "path",
+                              "type": "string"
+                            },
+                            "pathType": {
+                              "default": "ImplementationSpecific",
+                              "required": [],
+                              "title": "pathType",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "path",
+                            "pathType"
+                          ],
+                          "type": "object"
+                        }
+                      ],
+                      "required": []
+                    },
+                    "required": [],
+                    "title": "paths",
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "host",
+                  "paths"
+                ],
+                "type": "object"
+              }
+            ],
+            "required": []
+          },
+          "required": [],
+          "title": "hosts",
+          "type": "array"
+        },
+        "tls": {
+          "description": "TLS settings for the Ingress",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "tls",
+          "type": "array"
+        }
+      },
+      "required": [],
+      "title": "Ingress Settings"
+    },
+    "ingressRoutes": {
+      "additionalProperties": false,
+      "description": " title: IngressRoute Settings @schema",
+      "properties": {
+        "enabled": {
+          "default": false,
+          "description": "Enable IngressRoute",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "matchHost": {
+          "default": "",
+          "description": "Match host for IngressRoute",
+          "required": [],
+          "title": "matchHost",
+          "type": "boolean"
+        },
+        "routes": {
+          "description": "Routes for the IngressRoute",
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "routes",
+          "type": "array"
+        },
+        "tlsEnabled": {
+          "default": false,
+          "description": "Enable TLS for IngressRoute",
+          "required": [],
+          "title": "tlsEnabled",
+          "type": "boolean"
+        }
+      },
+      "required": [],
+      "title": "IngressRoute Settings"
+    },
+    "job": {
+      "additionalProperties": false,
+      "description": " title: Job Settings @schema",
+      "properties": {
+        "backoffLimit": {
+          "default": 5,
+          "description": "Job backoff limit",
+          "required": [],
+          "title": "backoffLimit",
+          "type": "integer"
+        },
+        "enabled": {
+          "default": false,
+          "description": "Enable the job",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "restartPolicy": {
+          "default": "OnFailure",
+          "description": "Job restart policy",
+          "required": [],
+          "title": "restartPolicy",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "title": "Job Settings"
+    },
+    "kafka": {
+      "additionalProperties": false,
+      "description": " title: Kafka Settings @schema",
+      "properties": {
+        "enabled": {
+          "default": false,
+          "description": "Enable Kafka client",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [],
+      "title": "Kafka Settings"
+    },
+    "keycloakAdmin": {
+      "additionalProperties": false,
+      "description": " title: Keycloak Admin Settings @schema",
+      "properties": {
+        "enabled": {
+          "default": false,
+          "description": "Enable Keycloak Admin client",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [],
+      "title": "Keycloak Admin Settings"
+    },
+    "livenessProbe": {
+      "additionalProperties": false,
+      "description": "Liveness probe configuration.",
+      "required": [],
+      "title": "livenessProbe",
+      "type": "object"
+    },
+    "minio": {
+      "additionalProperties": false,
+      "description": " title: Minio Settings @schema",
+      "properties": {
+        "enabled": {
+          "default": false,
+          "description": "Enable Minio client",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [],
+      "title": "Minio Settings"
+    },
+    "nameOverride": {
+      "default": "",
+      "description": "Override the chart name.",
+      "required": [],
+      "title": "nameOverride",
+      "type": "string"
+    },
+    "nodeSelector": {
+      "additionalProperties": false,
+      "description": "Node selector configuration.",
+      "required": [],
+      "title": "nodeSelector",
+      "type": "object"
+    },
+    "oidc": {
+      "additionalProperties": false,
+      "description": " title: OIDC Settings type: object @schema",
+      "properties": {
+        "enabled": {
+          "default": false,
+          "description": "Enable OIDC support",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [],
+      "title": "OIDC Settings",
+      "type": "object"
+    },
+    "openfga": {
+      "additionalProperties": false,
+      "description": " title: OpenFGA Settings @schema",
+      "properties": {
+        "enabled": {
+          "default": false,
+          "description": "Enable OpenFGA client",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [],
+      "title": "OpenFGA Settings"
+    },
+    "podAnnotations": {
+      "additionalProperties": false,
+      "description": "Annotations to add to the pod.",
+      "required": [],
+      "title": "podAnnotations",
+      "type": "object"
+    },
+    "podLabels": {
+      "additionalProperties": false,
+      "description": "Labels to add to the pod.",
+      "required": [],
+      "title": "podLabels",
+      "type": "object"
+    },
+    "podSecurityContext": {
+      "additionalProperties": false,
+      "description": "Security context for the pod.",
+      "required": [],
+      "title": "podSecurityContext",
+      "type": "object"
+    },
+    "quarkus": {
+      "additionalProperties": false,
+      "description": "Tag for the image. Overrides the chart appVersion. tag: \"\" @schema title: Quarkus Settings @schema",
+      "properties": {
+        "httpPort": {
+          "default": 8080,
+          "description": "Quarkus HTTP port",
+          "required": [],
+          "title": "httpPort",
+          "type": "integer"
+        },
+        "metricsPort": {
+          "default": "",
+          "description": "Quarkus metrics port",
+          "required": [],
+          "title": "metricsPort",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "title": "Quarkus Settings"
+    },
+    "readinessProbe": {
+      "additionalProperties": false,
+      "description": "Readiness probe configuration.",
+      "required": [],
+      "title": "readinessProbe",
+      "type": "object"
+    },
+    "replicaCount": {
+      "default": 1,
+      "description": "Number of replicas for the deployment.",
+      "required": [],
+      "title": "replicaCount",
+      "type": "integer"
+    },
+    "resources": {
+      "additionalProperties": false,
+      "description": "Resource requests and limits.",
+      "required": [],
+      "title": "resources",
+      "type": "object"
+    },
+    "securityContext": {
+      "additionalProperties": false,
+      "description": "Security context for the container.",
+      "required": [],
+      "title": "securityContext",
+      "type": "object"
+    },
+    "service": {
+      "additionalProperties": false,
+      "description": " title: Service Settings @schema",
+      "properties": {
+        "port": {
+          "default": 80,
+          "description": "Service port.",
+          "required": [],
+          "title": "port",
+          "type": "integer"
+        },
+        "type": {
+          "default": "ClusterIP",
+          "description": "Service type.",
+          "required": [],
+          "title": "type",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "title": "Service Settings"
+    },
+    "tolerations": {
+      "description": "Tolerations configuration.",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "tolerations",
+      "type": "array"
+    },
+    "volumeMounts": {
+      "description": "Additional volume mounts.",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "volumeMounts",
+      "type": "array"
+    },
+    "volumes": {
+      "description": "Additional volumes.",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "volumes",
+      "type": "array"
+    }
+  },
+  "required": [],
+  "type": "object"
+}

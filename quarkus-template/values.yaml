@@ -1,290 +1,683 @@
-# Global config for various dependencies we use in our Quarkus based applications
-# These global values are used only when the dependency is enabled in the application
-# by setting the equivalent `.Values.<dependency>.enabled` to `true`
+# yaml-language-server: $schema=values.schema.json
 
+# @schema
+# title: Global Settings
+# type: object
+# @schema
 global:
+  # @schema
+  # type: string
+  # @schema
+  # -- Hostname for the ingress
   host: ""
+  # @schema
+  # title: Ingress Route Settings
+  # type: object
+  # @schema
   ingressRoutes:
+    # @schema
+    # type: boolean
+    # @schema
+    # -- Automatically create IngressRoute for the host
     matchHost: false
+    # @schema
+    # type: boolean
+    # @schema
+    # -- Enable TLS for the IngressRoute
     tlsEnabled: false
+    # @schema
+    # type: string
+    # @schema
+    # -- Proxy protocol for the IngressRoute
     proxy: "none"
 
+  # @schema
+  # title: Environment Variables
+  # type: array
+  # @schema
+  # -- Global environment variables
   env: []
 
+  # @schema
+  # title: Application YAML
+  # type: object
+  # @schema
   applicationYaml: {}
 
+  # @schema
+  # title: Image Settings
+  # type: object
+  # @schema
   image:
+    # @schema
+    # type: string
+    # @schema
+    # -- Image registry
     registry: "gitlab.ilabt.imec.be:4567/discover/packages"
+    # @schema
+    # type: string
+    # @schema
+    # -- Image tag
     tag: ""
+    # @schema
+    # type: string
+    # @schema
+    # -- Image pull policy
     pullPolicy: IfNotPresent
 
+  # @schema
+  # title: Image Pull Secrets
+  # type: array
+  # @schema
+  # -- Global image pull secrets
   imagePullSecrets: []
 
+  # @schema
+  # title: Deployment Strategy
+  # type: object
+  # @schema
   deploymentStrategy: {}
+  # @schema
+  # title: Liveness Probe
+  # type: object
+  # @schema
   livenessProbe: {}
+  # @schema
+  # title: Readiness Probe
+  # type: object
+  # @schema
   readinessProbe: {}
 
+  # @schema
+  # title: Quarkus Settings
+  # type: object
+  # @schema
   quarkus:
+    # @schema
+    # type: integer
+    # @schema
+    # -- Quarkus HTTP port
     httpPort: 8080
+    # @schema
+    # type: string
+    # @schema
+    # -- Quarkus metrics port
     metricsPort: ""
+    # @schema
+    # title: Logging Settings
+    # type: object
+    # @schema
     logging:
+      # @schema
+      # type: string
+      # @schema
+      # -- Logging level
       level: INFO
 
+  # @schema
+  # title: Truststore Settings
+  # type: object
+  # @schema
   truststore: {}
 
+  # @schema
+  # title: OIDC Settings
+  # type: object
+  # @schema
   oidc:
+    # @schema
+    # type: string
+    # @schema
+    # -- OIDC auth server URL
     authServerUrl: ""
+    # @schema
+    # type: string
+    # @schema
+    # -- OIDC client ID
     clientId: ""
+    # @schema
+    # type: string
+    # @schema
+    # -- OIDC client secret
     clientSecret: ""
+    # @schema
+    # type: string
+    # @schema
+    # -- OIDC realm
     realm: ""
-    existingSecret: ""
+    # @schema
+    # type: string
+    # @schema
+    # -- Existing secret for OIDC
+    existingSecret: "ewq"
+    # @schema
+    # type: string
+    # @schema
+    # -- Key for client ID in existing secret
     clientIdSecretKey: "client-id"
+    # @schema
+    # type: string
+    # @schema
+    # -- Key for client secret in existing secret
     clientSecretSecretKey: "client-secret"
+    # @schema
+    # type: string
+    # @schema
+    # -- Key for realm in existing secret
     realmSecretKey: ""
+    # @schema
+    # title: Application YAML
+    # type: object
+    # @schema
     applicationYaml: {}
+  # @schema
+  # title: Keycloak Admin Settings
+  # type: object
+  # @schema
   keycloakAdmin:
+    # @schema
+    # type: boolean
+    # @schema
+    # -- Enable Keycloak admin client
     enabled: false
+    # @schema
+    # type: string
+    # @schema
+    # -- Keycloak server URL
     serverUrl: ""
+    # @schema
+    # type: string
+    # @schema
+    # -- Keycloak admin username
     username: ""
+    # @schema
+    # type: string
+    # @schema
+    # -- Keycloak admin password
     password: ""
+    # @schema
+    # type: string
+    # @schema
+    # -- Keycloak realm
     realm: ""
+    # @schema
+    # type: string
+    # @schema
+    # -- Existing secret for Keycloak admin
     existingSecret: ""
+    # @schema
+    # type: string
+    # @schema
+    # -- Key for username in existing secret
     usernameSecretKey: ""
+    # @schema
+    # type: string
+    # @schema
+    # -- Key for password in existing secret
     passwordSecretKey: ""
+  # @schema
+  # title: OpenFGA Settings
+  # type: object
+  # @schema
   openfga:
+    # @schema
+    # type: string
+    # @schema
+    # -- OpenFGA API URL
     url: ""
+    # @schema
+    # type: string
+    # @schema
+    # -- OpenFGA store ID
     storeId: ""
+    # @schema
+    # type: string
+    # @schema
+    # -- Existing secret for OpenFGA
     existingSecret: ""
+    # @schema
+    # type: string
+    # @schema
+    # -- Key for store ID in existing secret
     storeIdSecretKey: ""
+    # @schema
+    # title: Application YAML
+    # type: object
+    # @schema
     applicationYaml: {}
+  # @schema
+  # title: Minio Settings
+  # type: object
+  # @schema
   minio:
+    # @schema
+    # type: string
+    # @schema
+    # -- Minio host
     host: ""
+    # @schema
+    # type: string
+    # @schema
+    # -- Minio port
     port: ""
+    # @schema
+    # type: boolean
+    # @schema
+    # -- Use secure connection to Minio
     secure: true
+    # @schema
+    # type: boolean
+    # @schema
+    # -- Skip TLS verification for Minio
     skipTlsVerify: true
+    # @schema
+    # type: boolean
+    # @schema
+    # -- Use TLS for Minio
     useTls: false
+    # @schema
+    # type: string
+    # @schema
+    # -- Minio access key
     accessKey: ""
+    # @schema
+    # type: string
+    # @schema
+    # -- Minio secret key
     secretKey: ""
+    # @schema
+    # type: string
+    # @schema
+    # -- Existing secret for Minio
     existingSecret: ""
+    # @schema
+    # type: string
+    # @schema
+    # -- Key for access key in existing secret
     accessKeySecretKey: ""
+    # @schema
+    # type: string
+    # @schema
+    # -- Key for secret key in existing secret
     secretKeySecretKey: ""
+    # @schema
+    # title: Application YAML
+    # type: object
+    # @schema
     applicationYaml: {}
+  # @schema
+  # title: Kafka Settings
+  # type: object
+  # @schema
   kafka:
+    # @schema
+    # type: string
+    # @schema
+    # -- Kafka bootstrap servers
     bootstrapServers: ""
+    # @schema
+    # title: Application YAML
+    # type: object
+    # @schema
     applicationYaml: {}
+  # @schema
+  # title: Clickhouse Settings
+  # type: object
+  # @schema
   clickhouse:
+    # @schema
+    # type: string
+    # @schema
+    # -- Clickhouse host
     host: ""
+    # @schema
+    # type: string
+    # @schema
+    # -- Clickhouse port
     port: ""
+    # @schema
+    # title: Application YAML
+    # type: object
+    # @schema
     applicationYaml: {}
-  #  username: ""
-  #  password: ""
-  #  database: ""
-  #  existingSecret: ""
-  #  usernameSecretKey: ""
-  #  passwordSecretKey: ""
 
-# Dependency settings can be overridden from their global values.
-# To override a value, uncomment the corresponding key and set the desired value.
+# @schema
+# title: OIDC Settings
+# type: object
+# @schema
 oidc:
+  # @schema
+  # type: boolean
+  # @schema
+  # -- Enable OIDC support
   enabled: false
+  # @schema
+  # type: string
+  # @schema
+  # -- OIDC authentication server URL
   # authServerUrl: ""
-  # clientId: ""
-  # clientSecret: ""
-  # realm: ""
-  # existingSecret: ""
-  # clientIdSecretKey: ""
-  # clientSecretSecretKey: ""
-  # realmSecretKey: ""
-  # applicationYaml: {}
 
+# @schema
+# title: Keycloak Admin Settings
+# @schema
 keycloakAdmin:
+  # @schema
+  # type: boolean
+  # @schema
+  # -- Enable Keycloak Admin client
   enabled: false
-  # serverUrl: ""
-  # username: ""
-  # password: ""
-  # realm: ""
-  # existingSecret: ""
-  # usernameSecretKey: ""
-  # passwordSecretKey: ""
 
+# @schema
+# title: Minio Settings
+# @schema
 minio:
+  # @schema
+  # type: boolean
+  # @schema
+  # -- Enable Minio client
   enabled: false
-  # host: ""
-  # port: ""
-  # secure: true
-  # skipTlsVerify: true
-  # useTls: false
-  # accessKey: ""
-  # secretKey: ""
-  # existingSecret: ""
-  # accessKeySecretKey: ""
-  # secretKeySecretKey: ""
-  # applicationYaml: {}
 
+# @schema
+# title: Kafka Settings
+# @schema
 kafka:
+  # @schema
+  # type: boolean
+  # @schema
+  # -- Enable Kafka client
   enabled: false
-  # bootstrapServers: ""
-  # applicationYaml: {}
 
+# @schema
+# title: Clickhouse Settings
+# @schema
 clickhouse:
+  # @schema
+  # type: boolean
+  # @schema
+  # -- Enable Clickhouse client
   enabled: false
-  # host: ""
-  # port: ""
-  # applicationYaml: {}
 
+# @schema
+# title: OpenFGA Settings
+# @schema
 openfga:
+  # @schema
+  # type: boolean
+  # @schema
+  # -- Enable OpenFGA client
   enabled: false
-  # url: ""
-  # storeId: ""
-  # existingSecret: ""
-  # storeIdSecretKey: ""
-  # applicationYaml: {}
 
+# @schema
+# title: Job Settings
+# @schema
 job:
+  # @schema
+  # type: boolean
+  # @schema
+  # -- Enable the job
   enabled: false
+  # @schema
+  # type: integer
+  # @schema
+  # -- Job backoff limit
   backoffLimit: 5
+  # @schema
+  # type: string
+  # @schema
+  # -- Job restart policy
   restartPolicy: "OnFailure"
 
-# This will set the replicaset count more information can be found here: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
+# @schema
+# type: integer
+# @schema
+# -- Number of replicas for the deployment.
 replicaCount: 1
 
-# Set chart image name and override global values
+# @schema
+# title: Image Settings
+# @schema
 image:
-  {}
-  #  Defaults to chart name when not set
+  # @schema
+  # type: string
+  # @schema
+  # -- Name of the image. Defaults to the chart name.
   # name: ""
-  # Overrides the registry for the image.
+  # @schema
+  # type: string
+  # @schema
+  # -- Registry for the image. Overrides the global registry.
   # registry: ""
-  # This sets the pull policy for images.
+  # @schema
+  # type: string
+  # @schema
+  # -- Image pull policy.
   # pullPolicy: ""
-  # Overrides the image tag whose default is the chart appVersion.
+  # @schema
+  # type: string
+  # @schema
+  # -- Tag for the image. Overrides the chart appVersion.
   # tag: ""
 
+# @schema
+# title: Quarkus Settings
+# @schema
 quarkus:
+  # @schema
+  # type: integer
+  # @schema
+  # -- Quarkus HTTP port
   httpPort: 8080
+  # @schema
+  # type: string
+  # @schema
+  # -- Quarkus metrics port
   metricsPort: ""
 
-# Additional application.properties entries to be added to the deployment
-# Values are appended to the default application.properties
+# @schema
+# type: string
+# @schema
+# -- Additional application.properties entries
 applicationProperties: ""
 
-# Application.yaml entries to be added to the deployment
-# The chart only uses a default application.properties file and config
-# through environment variables.
-# Make sure your application has the `quarkus-config-yaml` extension enabled if you want to use this.
-# Relevant order of precedence (https://quarkus.io/guides/config-reference#configuration-sources):
-# 1. environment variables
-# 2. application.yaml (if using the `quarkus-config-yaml` extension)
-# 3. application.properties
+# @schema
+# type: object
+# @schema
+# -- Additional application.yaml entries
 applicationYaml: {}
 
-# This is for the secretes for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+# @schema
+# type: array
+# @schema
+# -- Secrets for pulling images from a private repository.
 imagePullSecrets: []
-# This is to override the chart name.
+# @schema
+# type: string
+# @schema
+# -- Override the chart name.
 nameOverride: ""
+# @schema
+# type: string
+# @schema
+# -- Override the full name of the chart.
 fullnameOverride: ""
 
-# This is for setting Kubernetes Annotations to a Pod.
-# For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+# @schema
+# type: object
+# @schema
+# -- Annotations to add to the pod.
 podAnnotations: {}
-# This is for setting Kubernetes Labels to a Pod.
-# For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+# @schema
+# type: object
+# @schema
+# -- Labels to add to the pod.
 podLabels: {}
 
-podSecurityContext:
-  {}
-  # fsGroup: 2000
+# @schema
+# type: object
+# @schema
+# -- Security context for the pod.
+podSecurityContext: {}
 
-securityContext:
-  {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+# @schema
+# type: object
+# @schema
+# -- Security context for the container.
+securityContext: {}
 
-# This is for setting up a service more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/
+# @schema
+# title: Service Settings
+# @schema
 service:
-  # This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
+  # @schema
+  # type: string
+  # @schema
+  # -- Service type.
   type: ClusterIP
-  # This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
+  # @schema
+  # type: integer
+  # @schema
+  # -- Service port.
   port: 80
 
+# @schema
+# title: IngressRoute Settings
+# @schema
 ingressRoutes:
+  # @schema
+  # type: boolean
+  # @schema
+  # -- Match host for IngressRoute
   matchHost:
+  # @schema
+  # type: boolean
+  # @schema
+  # -- Enable IngressRoute
   enabled: false
+  # @schema
+  # type: boolean
+  # @schema
+  # -- Enable TLS for IngressRoute
   tlsEnabled: false
+  # @schema
+  # type: array
+  # @schema
+  # -- Routes for the IngressRoute
   routes: []
-#  routes:
-#    - match: "Host(`chart-example.local`)"
-#      middlewares:
-#        - name: StripPrefix
 
-# This block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
+# @schema
+# title: Ingress Settings
+# @schema
 ingress:
+  # @schema
+  # type: boolean
+  # @schema
+  # -- Enable Ingress
   enabled: false
+  # @schema
+  # type: string
+  # @schema
+  # -- Ingress class name
   className: ""
-  annotations:
-    {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+  # @schema
+  # type: object
+  # @schema
+  # -- Annotations for the Ingress
+  annotations: {}
+  # @schema
+  # type: array
+  # @schema
+  # -- Hosts for the Ingress
   hosts:
     - host: chart-example.local
       paths:
         - path: /
           pathType: ImplementationSpecific
+  # @schema
+  # type: array
+  # @schema
+  # -- TLS settings for the Ingress
   tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
 
-resources:
-  {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+# @schema
+# type: object
+# @schema
+# -- Resource requests and limits.
+resources: {}
 
-# This is to setup the liveness and readiness probes more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+# @schema
+# type: object
+# @schema
+# -- Liveness probe configuration.
 livenessProbe: {}
+# @schema
+# type: object
+# @schema
+# -- Readiness probe configuration.
 readinessProbe: {}
 
-# This section is for setting up autoscaling more information can be found here: https://kubernetes.io/docs/concepts/workloads/autoscaling/
+# @schema
+# title: Autoscaling Settings
+# @schema
 autoscaling:
+  # @schema
+  # type: boolean
+  # @schema
+  # -- Enable autoscaling
   enabled: false
+  # @schema
+  # type: integer
+  # @schema
+  # -- Minimum number of replicas
   minReplicas: 1
+  # @schema
+  # type: integer
+  # @schema
+  # -- Maximum number of replicas
   maxReplicas: 100
+  # @schema
+  # type: integer
+  # @schema
+  # -- Target CPU utilization percentage
   targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
 
+# @schema
+# type: object
+# @schema
+# -- Deployment strategy.
 deploymentStrategy: {}
 
-# Additional environment variables to be set on the output Deployment definition.
+# @schema
+# type: array
+# @schema
+# -- Additional environment variables.
 env: []
 
-# Additional volumes on the output Deployment definition.
+# @schema
+# type: array
+# @schema
+# -- Additional volumes.
 volumes: []
-# - name: foo
-#   secret:
-#     secretName: mysecret
-#     optional: false
 
-# Additional volumeMounts on the output Deployment definition.
+# @schema
+# type: array
+# @schema
+# -- Additional volume mounts.
 volumeMounts: []
-# - name: foo
-#   mountPath: "/etc/foo"
-#   readOnly: true
 
+# @schema
+# type: object
+# @schema
+# -- Node selector configuration.
 nodeSelector: {}
 
+# @schema
+# type: array
+# @schema
+# -- Tolerations configuration.
 tolerations: []
 
+# @schema
+# type: object
+# @schema
+# -- Affinity configuration.
 affinity: {}
-
