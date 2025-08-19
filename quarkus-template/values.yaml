@@ -37,7 +37,7 @@ global:
     clientId: ""
     clientSecret: ""
     realm: ""
-    existingSecret: "ewq"
+    existingSecret: ""
     clientIdSecretKey: "client-id"
     clientSecretSecretKey: "client-secret"
     realmSecretKey: ""
@@ -83,20 +83,62 @@ global:
   #  usernameSecretKey: ""
   #  passwordSecretKey: ""
 
-# Enable dependency setting injection through global various
-# TODO: allow overriding values for each dependency
+# Dependency settings can be overridden from their global values.
+# To override a value, uncomment the corresponding key and set the desired value.
 oidc:
   enabled: false
+  # authServerUrl: ""
+  # clientId: ""
+  # clientSecret: ""
+  # realm: ""
+  # existingSecret: ""
+  # clientIdSecretKey: ""
+  # clientSecretSecretKey: ""
+  # realmSecretKey: ""
+  # applicationYaml: {}
+
 keycloakAdmin:
   enabled: false
+  # serverUrl: ""
+  # username: ""
+  # password: ""
+  # realm: ""
+  # existingSecret: ""
+  # usernameSecretKey: ""
+  # passwordSecretKey: ""
+
 minio:
   enabled: false
+  # host: ""
+  # port: ""
+  # secure: true
+  # skipTlsVerify: true
+  # useTls: false
+  # accessKey: ""
+  # secretKey: ""
+  # existingSecret: ""
+  # accessKeySecretKey: ""
+  # secretKeySecretKey: ""
+  # applicationYaml: {}
+
 kafka:
   enabled: false
+  # bootstrapServers: ""
+  # applicationYaml: {}
+
 clickhouse:
   enabled: false
+  # host: ""
+  # port: ""
+  # applicationYaml: {}
+
 openfga:
   enabled: false
+  # url: ""
+  # storeId: ""
+  # existingSecret: ""
+  # storeIdSecretKey: ""
+  # applicationYaml: {}
 
 job:
   enabled: false
@@ -108,13 +150,15 @@ replicaCount: 1
 
 # Set chart image name and override global values
 image:
+  {}
   #  Defaults to chart name when not set
-  name: ""
-  registry: ""
+  # name: ""
+  # Overrides the registry for the image.
+  # registry: ""
   # This sets the pull policy for images.
-  pullPolicy: ""
+  # pullPolicy: ""
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  # tag: ""
 
 quarkus:
   httpPort: 8080
@@ -243,3 +287,4 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+

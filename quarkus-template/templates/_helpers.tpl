@@ -54,34 +54,40 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 The image reference for the Quarkus application
 */}}
 {{- define "quarkus-template.image" }}
-{{- $registry := .Values.image.registry | default .Values.global.image.registry }}
+{{- $registry := coalesce .Values.image.registry .Values.global.image.registry }}
 {{- $name := .Values.image.name | default .Chart.Name }}
-{{- $tag := .Values.image.tag | default .Values.global.image.tag | default .Chart.AppVersion }}
+{{- $tag := coalesce .Values.image.tag .Values.global.image.tag .Chart.AppVersion }}
 {{- printf "%s/%s:%s" $registry $name $tag }}
 {{- end }}
 
 {{- define "quarkus-template.oidc.envConfig" -}}
+{{- $authServerUrl := coalesce .Values.oidc.authServerUrl .Values.global.oidc.authServerUrl }}
+{{- $existingSecret := coalesce .Values.oidc.existingSecret .Values.global.oidc.existingSecret }}
+{{- $clientIdSecretKey := coalesce .Values.oidc.clientIdSecretKey .Values.global.oidc.clientIdSecretKey }}
+{{- $clientId := coalesce .Values.oidc.clientId .Values.global.oidc.clientId }}
+{{- $clientSecretSecretKey := coalesce .Values.oidc.clientSecretSecretKey .Values.global.oidc.clientSecretSecretKey }}
+{{- $clientSecret := coalesce .Values.oidc.clientSecret .Values.global.oidc.clientSecret }}
 - name: QUARKUS_OIDC_AUTH_SERVER_URL
-  value: {{ .Values.oidc.authServerUrl | default .Values.global.oidc.authServerUrl | quote }}
-{{- if and .Values.global.oidc.existingSecret .Values.global.oidc.clientIdSecretKey }}
+  value: {{ $authServerUrl | quote }}
+{{- if and $existingSecret $clientIdSecretKey }}
 - name: QUARKUS_OIDC_CLIENT_ID
   valueFrom:
     secretKeyRef:
-      name: {{ .Values.global.oidc.existingSecret }}
-      key: {{ .Values.global.oidc.clientIdSecretKey }}
-{{- else if .Values.global.oidc.clientId }}
+      name: {{ $existingSecret }}
+      key: {{ $clientIdSecretKey }}
+{{- else if $clientId }}
 - name: QUARKUS_OIDC_CLIENT_ID
-  value: {{ .Values.global.oidc.clientId | quote }}
+  value: {{ $clientId | quote }}
 {{- end }}
-{{- if and .Values.global.oidc.existingSecret .Values.global.oidc.clientSecretSecretKey }}
+{{- if and $existingSecret $clientSecretSecretKey }}
 - name: QUARKUS_OIDC_CREDENTIALS_SECRET
   valueFrom:
     secretKeyRef:
-      name: {{ .Values.global.oidc.existingSecret }}
-      key: {{ .Values.global.oidc.clientSecretSecretKey }}
-{{- else if .Values.global.oidc.clientSecret }}
+      name: {{ $existingSecret }}
+      key: {{ $clientSecretSecretKey }}
+{{- else if $clientSecret }}
 - name: QUARKUS_OIDC_CREDENTIALS_SECRET
-  value: {{ .Values.global.oidc.clientSecret | quote }}
+  value: {{ $clientSecret | quote }}
 {{- end }}
 {{- end }}
 
@@ -89,42 +95,48 @@ The image reference for the Quarkus application
 {{- end }}
 
 {{- define "quarkus-template.keycloakAdmin.envConfig" -}}
+{{- $enabled := .Values.keycloakAdmin.enabled }}
+{{- $serverUrl := coalesce .Values.keycloakAdmin.serverUrl .Values.global.keycloakAdmin.serverUrl }}
+{{- $realm := coalesce .Values.keycloakAdmin.realm .Values.global.keycloakAdmin.realm }}
+{{- $existingSecret := coalesce .Values.keycloakAdmin.existingSecret .Values.global.keycloakAdmin.existingSecret }}
+{{- $usernameSecretKey := coalesce .Values.keycloakAdmin.usernameSecretKey .Values.global.keycloakAdmin.usernameSecretKey }}
+{{- $username := coalesce .Values.keycloakAdmin.username .Values.global.keycloakAdmin.username }}
+{{- $passwordSecretKey := coalesce .Values.keycloakAdmin.passwordSecretKey .Values.global.keycloakAdmin.passwordSecretKey }}
+{{- $password := coalesce .Values.keycloakAdmin.password .Values.global.keycloakAdmin.password }}
 - name: QUARKUS_KEYCLOAK_ADMIN_CLIENT_ENABLED
-  value: {{ .Values.keycloakAdmin.enabled | quote }}
+  value: {{ $enabled | quote }}
 - name: QUARKUS_KEYCLOAK_ADMIN_CLIENT_SERVER_URL
-  value: {{ .Values.global.keycloakAdmin.serverUrl | quote }}
+  value: {{ $serverUrl | quote }}
 - name: QUARKUS_KEYCLOAK_ADMIN_CLIENT_GRANT_TYPE
   value: "password"
 - name: QUARKUS_KEYCLOAK_ADMIN_CLIENT_REALM
-  value: {{ .Values.global.keycloakAdmin.realm | quote }}
-{{- if and .Values.global.keycloakAdmin.existingSecret .Values.global.keycloakAdmin.usernameSecretKey }}
+  value: {{ $realm | quote }}
+{{- if and $existingSecret $usernameSecretKey }}
 - name: QUARKUS_KEYCLOAK_ADMIN_CLIENT_USERNAME
   valueFrom:
     secretKeyRef:
-      name: {{ .Values.global.keycloakAdmin.existingSecret }}
-      key: {{ .Values.global.keycloakAdmin.usernameSecretKey }}
-{{- else if .Values.global.keycloakAdmin.username }}
+      name: {{ $existingSecret }}
+      key: {{ $usernameSecretKey }}
+{{- else if $username }}
 - name: QUARKUS_KEYCLOAK_ADMIN_CLIENT_USERNAME
-  value: {{ .Values.global.keycloakAdmin.username | quote }}
+  value: {{ $username | quote }}
 {{- end }}
-
-{{- if and .Values.global.keycloakAdmin.existingSecret .Values.global.keycloakAdmin.passwordSecretKey }}
+{{- if and $existingSecret $passwordSecretKey }}
 - name: QUARKUS_KEYCLOAK_ADMIN_CLIENT_PASSWORD
   valueFrom:
     secretKeyRef:
-      name: {{ .Values.global.keycloakAdmin.existingSecret }}
-      key: {{ .Values.global.keycloakAdmin.passwordSecretKey }}
-{{- else if .Values.global.keycloakAdmin.password }}
+      name: {{ $existingSecret }}
+      key: {{ $passwordSecretKey }}
+{{- else if $password }}
 - name: QUARKUS_KEYCLOAK_ADMIN_CLIENT_PASSWORD
-  value: {{ .Values.global.keycloakAdmin.password | quote }}
+  value: {{ $password | quote }}
 {{- end }}
-
 {{- end }}
 
 
 {{- define "quarkus-template.kafka.envConfig" -}}
 - name: KAFKA_BOOTSTRAP_SERVERS
-  value: {{ .Values.global.kafka.bootstrapServers  | quote }}
+  value: {{ coalesce .Values.kafka.bootstrapServers .Values.global.kafka.bootstrapServers | quote }}
 {{- end }}
 
 {{- define "quarkus-template.kafka.envConfig.additional" -}}
@@ -137,29 +149,38 @@ The image reference for the Quarkus application
 {{- end }}
 
 {{- define "quarkus-template.minio.envConfig" -}}
+{{- $useTls := coalesce .Values.minio.useTls .Values.global.minio.useTls }}
+{{- $host := coalesce .Values.minio.host .Values.global.minio.host }}
+{{- $port := coalesce .Values.minio.port .Values.global.minio.port }}
+{{- $skipTlsVerify := coalesce .Values.minio.skipTlsVerify .Values.global.minio.skipTlsVerify }}
+{{- $existingSecret := coalesce .Values.minio.existingSecret .Values.global.minio.existingSecret }}
+{{- $accessKeySecretKey := coalesce .Values.minio.accessKeySecretKey .Values.global.minio.accessKeySecretKey }}
+{{- $accessKey := coalesce .Values.minio.accessKey .Values.global.minio.accessKey }}
+{{- $secretKeySecretKey := coalesce .Values.minio.secretKeySecretKey .Values.global.minio.secretKeySecretKey }}
+{{- $secretKey := coalesce .Values.minio.secretKey .Values.global.minio.secretKey }}
 - name: QUARKUS_MINIO_URL
-  value: "{{.Values.global.minio.useTls | ternary "https" "http" }}://{{ .Values.global.minio.host }}:{{ .Values.global.minio.port }}"
+  value: "{{ $useTls | ternary "https" "http" }}://{{ $host }}:{{ $port }}"
 - name: QUARKUS_MINIO_SECURE
-  value: {{ not .Values.global.minio.skipTlsVerify | quote }}
-{{- if and .Values.global.minio.existingSecret .Values.global.minio.accessKeySecretKey }}
+  value: {{ not $skipTlsVerify | quote }}
+{{- if and $existingSecret $accessKeySecretKey }}
 - name: QUARKUS_MINIO_ACCESS_KEY
   valueFrom:
     secretKeyRef:
-      name: {{ .Values.global.minio.existingSecret }}
-      key: {{ .Values.global.minio.accessKeySecretKey }}
-{{- else if .Values.global.minio.accessKey }}
+      name: {{ $existingSecret }}
+      key: {{ $accessKeySecretKey }}
+{{- else if $accessKey }}
 - name: QUARKUS_MINIO_ACCESS_KEY
-  value: {{ .Values.global.minio.accessKey | quote }}
+  value: {{ $accessKey | quote }}
 {{- end }}
-{{- if and .Values.global.minio.existingSecret .Values.global.minio.secretKeySecretKey }}
+{{- if and $existingSecret $secretKeySecretKey }}
 - name: QUARKUS_MINIO_SECRET_KEY
   valueFrom:
     secretKeyRef:
-      name: {{ .Values.global.minio.existingSecret }}
-      key: {{ .Values.global.minio.secretKeySecretKey }}
-{{- else if .Values.global.minio.secretKey }}
+      name: {{ $existingSecret }}
+      key: {{ $secretKeySecretKey }}
+{{- else if $secretKey }}
 - name: QUARKUS_MINIO_SECRET_KEY
-  value: {{ .Values.global.minio.secretKey | quote }}
+  value: {{ $secretKey | quote }}
 {{- end }}
 {{- end }}
 
@@ -168,16 +189,20 @@ The image reference for the Quarkus application
 
 
 {{- define "quarkus-template.openfga.envConfig" -}}
+{{- $url := coalesce .Values.openfga.url .Values.global.openfga.url }}
+{{- $existingSecret := coalesce .Values.openfga.existingSecret .Values.global.openfga.existingSecret }}
+{{- $storeIdSecretKey := coalesce .Values.openfga.storeIdSecretKey .Values.global.openfga.storeIdSecretKey }}
+{{- $storeId := coalesce .Values.openfga.storeId .Values.global.openfga.storeId }}
 - name: QUARKUS_OPENFGA_URL
-  value: {{ .Values.global.openfga.url | quote }}
-{{- if and .Values.global.openfga.existingSecret .Values.global.openfga.storeIdSecretKey }}
+  value: {{ $url | quote }}
+{{- if and $existingSecret $storeIdSecretKey }}
 - name: QUARKUS_OPENFGA_STORE
   valueFrom:
     secretKeyRef:
-      name: {{ .Values.global.openfga.existingSecret }}
-      key: {{ .Values.global.openfga.storeIdSecretKey }}
-{{- else if .Values.global.openfga.storeId }}
+      name: {{ $existingSecret }}
+      key: {{ $storeIdSecretKey }}
+{{- else if $storeId }}
 - name: QUARKUS_OPENFGA_STORE
-  value: {{ .Values.global.openfga.storeId | quote }}
+  value: {{ $storeId | quote }}
 {{- end }}
 {{- end }}

@@ -17,6 +17,10 @@ global:
     enabled: true
     url: "https://openfga.example.org"
     storeId: "default-store"
+  oidc:
+    authServerUrl: http://keycloak.keycloak/auth
+    clientId: quarkus
+    clientSecret: secret
 ingressRoutes:
   enabled: true
   routes:
@@ -28,3 +32,9 @@ ingressRoutes:
         - name: StripPrefix
 openfga:
   enabled: true
+oidc:
+  enabled: true
+  authServerUrl: https://obelisk.example.org/auth/realms/obelisk
+keycloakAdmin:
+  enabled: true
+  serverUrl: https://obelisk.example.org/auth
