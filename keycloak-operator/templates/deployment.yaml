@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "keycloak-operator.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "keycloak-operator.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "keycloak-operator.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "keycloak-operator.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+      annotations: {{ toYaml .Values.podAnnotations | nindent 8 }}
+    spec:
+      serviceAccountName: {{ default (include "keycloak-operator.fullname" .) .Values.serviceAccount.name }}
+      containers:
+        - name: keycloak-operator
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: RELATED_IMAGE_KEYCLOAK
+              value: "{{ .Values.relatedImageKeycloak }}"
+            - name: KUBERNETES_NAMESPACE
+              value: "{{ .Release.Namespace }}"
+{{- if .Values.extraEnv }}
+{{ toYaml .Values.extraEnv | indent 12 }}
+{{- end }}
+          ports:
+            - containerPort: {{ .Values.service.targetPort }}
+              name: http
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.livenessProbe.path }}
+              port: {{ .Values.livenessProbe.port }}
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.readinessProbe.path }}
+              port: {{ .Values.readinessProbe.port }}
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+          startupProbe:
+            httpGet:
+              path: {{ .Values.startupProbe.path }}
+              port: {{ .Values.startupProbe.port }}
+            initialDelaySeconds: {{ .Values.startupProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.startupProbe.periodSeconds }}
+            failureThreshold: {{ .Values.startupProbe.failureThreshold }}

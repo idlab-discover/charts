@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=values.schema.json
+# Default values for keycloak-operator.
+image:
+  repository: quay.io/keycloak/keycloak-operator
+  tag: "26.3.2"
+  pullPolicy: IfNotPresent
+
+relatedImageKeycloak: quay.io/keycloak/keycloak:26.3.2
+
+replicaCount: 1
+
+namespace: keycloak
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+rbac:
+  create: true
+
+resources:
+  requests:
+    cpu: 300m
+    memory: 450Mi
+  limits:
+    cpu: 700m
+    memory: 450Mi
+
+livenessProbe:
+  path: /q/health/live
+  port: 8080
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 1
+
+readinessProbe:
+  path: /q/health/ready
+  port: 8080
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 1
+
+startupProbe:
+  path: /q/health/started
+  port: 8080
+  initialDelaySeconds: 1
+  periodSeconds: 10
+  failureThreshold: 600
+
+serviceAccount:
+  create: true
+  name: ""
+
+podAnnotations: {}
+
+podLabels: {}
+
+extraEnv: {}

@@ -1,0 +1,6 @@
+Thank you for installing the Keycloak Operator.
+
+Important: CRDs are included in the chart's crds/ directory and will be installed by Helm on first install, but Helm will not manage CRD upgrades or deletion. Manage CRD lifecycle separately.
+
+To check operator status:
+  kubectl -n {{ .Release.Namespace }} get deployment {{ include "keycloak-operator.fullname" . }}

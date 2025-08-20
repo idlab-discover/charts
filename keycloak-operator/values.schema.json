@@ -1,0 +1,352 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "properties": {
+    "extraEnv": {
+      "additionalProperties": false,
+      "required": [],
+      "title": "extraEnv",
+      "type": "object"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "image": {
+      "additionalProperties": false,
+      "description": " Default values for keycloak-operator.",
+      "properties": {
+        "pullPolicy": {
+          "default": "IfNotPresent",
+          "required": [],
+          "title": "pullPolicy",
+          "type": "string"
+        },
+        "repository": {
+          "default": "quay.io/keycloak/keycloak-operator",
+          "required": [],
+          "title": "repository",
+          "type": "string"
+        },
+        "tag": {
+          "default": "26.3.2",
+          "required": [],
+          "title": "tag",
+          "type": "string"
+        }
+      },
+      "required": [
+        "repository",
+        "tag",
+        "pullPolicy"
+      ],
+      "title": "image"
+    },
+    "livenessProbe": {
+      "additionalProperties": false,
+      "properties": {
+        "initialDelaySeconds": {
+          "default": 10,
+          "required": [],
+          "title": "initialDelaySeconds",
+          "type": "integer"
+        },
+        "path": {
+          "default": "/q/health/live",
+          "required": [],
+          "title": "path",
+          "type": "string"
+        },
+        "periodSeconds": {
+          "default": 10,
+          "required": [],
+          "title": "periodSeconds",
+          "type": "integer"
+        },
+        "port": {
+          "default": 8080,
+          "required": [],
+          "title": "port",
+          "type": "integer"
+        },
+        "timeoutSeconds": {
+          "default": 1,
+          "required": [],
+          "title": "timeoutSeconds",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "port",
+        "initialDelaySeconds",
+        "periodSeconds",
+        "timeoutSeconds"
+      ],
+      "title": "livenessProbe",
+      "type": "object"
+    },
+    "namespace": {
+      "default": "keycloak",
+      "required": [],
+      "title": "namespace",
+      "type": "string"
+    },
+    "podAnnotations": {
+      "additionalProperties": false,
+      "required": [],
+      "title": "podAnnotations",
+      "type": "object"
+    },
+    "podLabels": {
+      "additionalProperties": false,
+      "required": [],
+      "title": "podLabels",
+      "type": "object"
+    },
+    "rbac": {
+      "additionalProperties": false,
+      "properties": {
+        "create": {
+          "default": true,
+          "required": [],
+          "title": "create",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "create"
+      ],
+      "title": "rbac",
+      "type": "object"
+    },
+    "readinessProbe": {
+      "additionalProperties": false,
+      "properties": {
+        "initialDelaySeconds": {
+          "default": 10,
+          "required": [],
+          "title": "initialDelaySeconds",
+          "type": "integer"
+        },
+        "path": {
+          "default": "/q/health/ready",
+          "required": [],
+          "title": "path",
+          "type": "string"
+        },
+        "periodSeconds": {
+          "default": 10,
+          "required": [],
+          "title": "periodSeconds",
+          "type": "integer"
+        },
+        "port": {
+          "default": 8080,
+          "required": [],
+          "title": "port",
+          "type": "integer"
+        },
+        "timeoutSeconds": {
+          "default": 1,
+          "required": [],
+          "title": "timeoutSeconds",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "port",
+        "initialDelaySeconds",
+        "periodSeconds",
+        "timeoutSeconds"
+      ],
+      "title": "readinessProbe",
+      "type": "object"
+    },
+    "relatedImageKeycloak": {
+      "default": "quay.io/keycloak/keycloak:26.3.2",
+      "required": [],
+      "title": "relatedImageKeycloak",
+      "type": "string"
+    },
+    "replicaCount": {
+      "default": 1,
+      "required": [],
+      "title": "replicaCount",
+      "type": "integer"
+    },
+    "resources": {
+      "additionalProperties": false,
+      "properties": {
+        "limits": {
+          "additionalProperties": false,
+          "properties": {
+            "cpu": {
+              "default": "700m",
+              "required": [],
+              "title": "cpu",
+              "type": "string"
+            },
+            "memory": {
+              "default": "450Mi",
+              "required": [],
+              "title": "memory",
+              "type": "string"
+            }
+          },
+          "required": [
+            "cpu",
+            "memory"
+          ],
+          "title": "limits",
+          "type": "object"
+        },
+        "requests": {
+          "additionalProperties": false,
+          "properties": {
+            "cpu": {
+              "default": "300m",
+              "required": [],
+              "title": "cpu",
+              "type": "string"
+            },
+            "memory": {
+              "default": "450Mi",
+              "required": [],
+              "title": "memory",
+              "type": "string"
+            }
+          },
+          "required": [
+            "cpu",
+            "memory"
+          ],
+          "title": "requests",
+          "type": "object"
+        }
+      },
+      "required": [
+        "requests",
+        "limits"
+      ],
+      "title": "resources",
+      "type": "object"
+    },
+    "service": {
+      "additionalProperties": false,
+      "properties": {
+        "port": {
+          "default": 80,
+          "required": [],
+          "title": "port",
+          "type": "integer"
+        },
+        "targetPort": {
+          "default": 8080,
+          "required": [],
+          "title": "targetPort",
+          "type": "integer"
+        },
+        "type": {
+          "default": "ClusterIP",
+          "required": [],
+          "title": "type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "port",
+        "targetPort"
+      ],
+      "title": "service",
+      "type": "object"
+    },
+    "serviceAccount": {
+      "additionalProperties": false,
+      "properties": {
+        "create": {
+          "default": true,
+          "required": [],
+          "title": "create",
+          "type": "boolean"
+        },
+        "name": {
+          "default": "",
+          "required": [],
+          "title": "name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "create",
+        "name"
+      ],
+      "title": "serviceAccount",
+      "type": "object"
+    },
+    "startupProbe": {
+      "additionalProperties": false,
+      "properties": {
+        "failureThreshold": {
+          "default": 600,
+          "required": [],
+          "title": "failureThreshold",
+          "type": "integer"
+        },
+        "initialDelaySeconds": {
+          "default": 1,
+          "required": [],
+          "title": "initialDelaySeconds",
+          "type": "integer"
+        },
+        "path": {
+          "default": "/q/health/started",
+          "required": [],
+          "title": "path",
+          "type": "string"
+        },
+        "periodSeconds": {
+          "default": 10,
+          "required": [],
+          "title": "periodSeconds",
+          "type": "integer"
+        },
+        "port": {
+          "default": 8080,
+          "required": [],
+          "title": "port",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "port",
+        "initialDelaySeconds",
+        "periodSeconds",
+        "failureThreshold"
+      ],
+      "title": "startupProbe",
+      "type": "object"
+    }
+  },
+  "required": [
+    "relatedImageKeycloak",
+    "replicaCount",
+    "namespace",
+    "service",
+    "rbac",
+    "resources",
+    "livenessProbe",
+    "readinessProbe",
+    "startupProbe",
+    "serviceAccount",
+    "podAnnotations",
+    "podLabels",
+    "extraEnv"
+  ],
+  "type": "object"
+}
