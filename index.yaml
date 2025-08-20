@@ -1,5 +1,17 @@
 apiVersion: v1
 entries:
+  keycloak-operator:
+  - apiVersion: v2
+    appVersion: 26.3.2
+    created: "2025-08-20T10:47:48.215156858Z"
+    description: A Helm chart to install the official Keycloak Operator (installs
+      CRDs into crds/ so Helm doesn't manage CRD upgrades/deletions)
+    digest: c9c51683be5b691f093a07aee0fde19191a345ce671246efa79162c5dfc4eb5a
+    name: keycloak-operator
+    type: application
+    urls:
+    - https://github.com/idlab-discover/charts/releases/download/keycloak-operator-0.1.1/keycloak-operator-0.1.1.tgz
+    version: 0.1.1
   quarkus-template:
   - apiVersion: v2
     appVersion: 0.1.0
@@ -81,4 +93,4 @@ entries:
     urls:
     - https://github.com/idlab-discover/charts/releases/download/quarkus-template-0.2.0/quarkus-template-0.2.0.tgz
     version: 0.2.0
-generated: "2025-08-19T08:56:57.763723578Z"
+generated: "2025-08-20T10:47:48.21517917Z"
