@@ -17,3 +17,11 @@ repos:
           # add references to values file if not exist
           - --add-schema-reference
           - --helm-docs-compatibility-mode
+  - repo: local
+    hooks:
+      - id: git-add
+        name: git add
+        entry: git add -u
+        language: system
+        stages: [commit]
+        files: \.(md|json)$
