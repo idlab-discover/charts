@@ -114,10 +114,24 @@
           "required": [],
           "title": "create",
           "type": "boolean"
+        },
+        "createClusterRoleBindings": {
+          "default": true,
+          "required": [],
+          "title": "createClusterRoleBindings",
+          "type": "boolean"
+        },
+        "createClusterRoles": {
+          "default": true,
+          "required": [],
+          "title": "createClusterRoles",
+          "type": "boolean"
         }
       },
       "required": [
-        "create"
+        "create",
+        "createClusterRoles",
+        "createClusterRoleBindings"
       ],
       "title": "rbac",
       "type": "object"

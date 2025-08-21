@@ -18,6 +18,8 @@ service:
 
 rbac:
   create: true
+  createClusterRoles: true
+  createClusterRoleBindings: true
 
 resources:
   requests:

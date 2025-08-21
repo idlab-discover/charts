@@ -4,11 +4,11 @@ kind: RoleBinding
 metadata:
   labels:
     app.kubernetes.io/name: {{ include "keycloak-operator.name" . }}
-  name: {{ include "keycloak-operator.fullname" . }}-role-binding
+  name: {{ include "keycloak-operator.fullname" . }}
 roleRef:
   kind: Role
   apiGroup: rbac.authorization.k8s.io
-  name: {{ include "keycloak-operator.fullname" . }}-role
+  name: {{ include "keycloak-operator.fullname" . }}
 subjects:
   - kind: ServiceAccount
     name: {{ default (include "keycloak-operator.fullname" .) .Values.serviceAccount.name }}
@@ -20,11 +20,11 @@ metadata:
   labels:
     app.kubernetes.io/name: {{ include "keycloak-operator.name" . }}
     app.kubernetes.io/version: {{ .Chart.AppVersion }}
-  name: {{ include "keycloak-operator.fullname" . }}-realmimportcontroller-role-binding
+  name: {{ include "keycloak-operator.fullname" . }}-realmimportcontroller
 roleRef:
   kind: ClusterRole
   apiGroup: rbac.authorization.k8s.io
-  name: {{ include "keycloak-operator.fullname" . }}-realmimportcontroller-cluster-role
+  name: {{ include "keycloak-operator.fullname" . }}-{{ .Release.Namespace }}-realmimportcontroller
 subjects:
   - kind: ServiceAccount
     name: {{ default (include "keycloak-operator.fullname" .) .Values.serviceAccount.name }}
@@ -36,11 +36,11 @@ metadata:
   labels:
     app.kubernetes.io/name: {{ include "keycloak-operator.name" . }}
     app.kubernetes.io/version: {{ .Chart.AppVersion }}
-  name: {{ include "keycloak-operator.fullname" . }}-keycloakcontroller-role-binding
+  name: {{ include "keycloak-operator.fullname" . }}-keycloakcontroller
 roleRef:
   kind: ClusterRole
   apiGroup: rbac.authorization.k8s.io
-  name: {{ include "keycloak-operator.fullname" . }}-keycloakcontroller-cluster-role
+  name: {{ include "keycloak-operator.fullname" . }}-{{ .Release.Namespace }}-keycloakcontroller
 subjects:
   - kind: ServiceAccount
     name: {{ default (include "keycloak-operator.fullname" .) .Values.serviceAccount.name }}
@@ -52,7 +52,7 @@ metadata:
   labels:
     app.kubernetes.io/name: {{ include "keycloak-operator.name" . }}
     app.kubernetes.io/version: {{ .Chart.AppVersion }}
-  name: {{ include "keycloak-operator.fullname" . }}-view
+  name: {{ include "keycloak-operator.fullname" . }}-view-rbac
 roleRef:
   kind: ClusterRole
   apiGroup: rbac.authorization.k8s.io

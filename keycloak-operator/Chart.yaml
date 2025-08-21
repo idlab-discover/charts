@@ -2,5 +2,5 @@ apiVersion: v2
 name: keycloak-operator
 description: A Helm chart to install the official Keycloak Operator (installs CRDs into crds/ so Helm doesn't manage CRD upgrades/deletions)
 type: application
-version: 0.1.3
+version: 0.2.0
 appVersion: "26.3.2"
