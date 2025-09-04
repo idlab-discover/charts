@@ -75,16 +75,19 @@ global:
   # @schema
   # title: Deployment Strategy
   # type: object
+  # additionalProperties: true
   # @schema
   deploymentStrategy: {}
   # @schema
   # title: Liveness Probe
   # type: object
+  # additionalProperties: true
   # @schema
   livenessProbe: {}
   # @schema
   # title: Readiness Probe
   # type: object
+  # additionalProperties: true
   # @schema
   readinessProbe: {}
 
@@ -149,7 +152,7 @@ global:
     # type: string
     # @schema
     # -- Existing secret for OIDC
-    existingSecret: "ewq"
+    existingSecret: ""
     # @schema
     # type: string
     # @schema
@@ -220,6 +223,11 @@ global:
   # type: object
   # @schema
   openfga:
+    # @schema
+    # type: boolean
+    # @schema
+    # -- Enable Openfga configuration
+    enabled: false
     # @schema
     # type: string
     # @schema
@@ -344,6 +352,7 @@ global:
 # @schema
 # title: OIDC Settings
 # type: object
+# additionalProperties: true
 # @schema
 oidc:
   # @schema
@@ -359,6 +368,8 @@ oidc:
 
 # @schema
 # title: Keycloak Admin Settings
+# type: object
+# additionalProperties: true
 # @schema
 keycloakAdmin:
   # @schema
@@ -369,6 +380,8 @@ keycloakAdmin:
 
 # @schema
 # title: Minio Settings
+# type: object
+# additionalProperties: true
 # @schema
 minio:
   # @schema
@@ -379,6 +392,8 @@ minio:
 
 # @schema
 # title: Kafka Settings
+# type: object
+# additionalProperties: true
 # @schema
 kafka:
   # @schema
@@ -389,6 +404,8 @@ kafka:
 
 # @schema
 # title: Clickhouse Settings
+# type: object
+# additionalProperties: true
 # @schema
 clickhouse:
   # @schema
@@ -399,6 +416,8 @@ clickhouse:
 
 # @schema
 # title: OpenFGA Settings
+# type: object
+# additionalProperties: true
 # @schema
 openfga:
   # @schema
@@ -483,10 +502,14 @@ podMonitor:
   # -- Enable PodMonitor creation
   enabled: false
   # @schema
-  # type: integer
+  # oneOf:
+  #   - type: string
+  #     pattern: s$
+  #   - type: string
+  #     pattern: m$
   # @schema
   # -- Scrape interval for PodMonitor
-  interval: 15s
+  interval: "15s"
 
 # @schema
 # type: string
@@ -559,7 +582,7 @@ service:
 # @schema
 ingressRoutes:
   # @schema
-  # type: boolean
+  # type: [boolean, null]
   # @schema
   # -- Match host for IngressRoute
   matchHost:
@@ -621,11 +644,13 @@ resources: {}
 
 # @schema
 # type: object
+# additionalProperties: true
 # @schema
 # -- Liveness probe configuration.
 livenessProbe: {}
 # @schema
 # type: object
+# additionalProperties: true
 # @schema
 # -- Readiness probe configuration.
 readinessProbe: {}
@@ -657,6 +682,7 @@ autoscaling:
 
 # @schema
 # type: object
+# additionalProperties: true
 # @schema
 # -- Deployment strategy.
 deploymentStrategy: {}

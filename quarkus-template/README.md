@@ -107,10 +107,11 @@ The command removes all the Kubernetes components associated with the chart and 
 | global.oidc.clientIdSecretKey | string | `"client-id"` | Key for client ID in existing secret |
 | global.oidc.clientSecret | string | `""` | OIDC client secret |
 | global.oidc.clientSecretSecretKey | string | `"client-secret"` | Key for client secret in existing secret |
-| global.oidc.existingSecret | string | `"ewq"` | Existing secret for OIDC |
+| global.oidc.existingSecret | string | `""` | Existing secret for OIDC |
 | global.oidc.realm | string | `""` | OIDC realm |
 | global.oidc.realmSecretKey | string | `""` | Key for realm in existing secret |
 | global.openfga.applicationYaml | object | `{}` |  |
+| global.openfga.enabled | bool | `false` | Enable Openfga configuration |
 | global.openfga.existingSecret | string | `""` | Existing secret for OpenFGA |
 | global.openfga.storeId | string | `""` | OpenFGA store ID |
 | global.openfga.storeIdSecretKey | string | `""` | Key for store ID in existing secret |

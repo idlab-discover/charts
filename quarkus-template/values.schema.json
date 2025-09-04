@@ -60,8 +60,8 @@
       "title": "Autoscaling Settings"
     },
     "clickhouse": {
-      "additionalProperties": false,
-      "description": " title: Clickhouse Settings @schema",
+      "additionalProperties": true,
+      "description": " title: Clickhouse Settings type: object additionalProperties: true @schema",
       "properties": {
         "enabled": {
           "default": false,
@@ -72,10 +72,11 @@
         }
       },
       "required": [],
-      "title": "Clickhouse Settings"
+      "title": "Clickhouse Settings",
+      "type": "object"
     },
     "deploymentStrategy": {
-      "additionalProperties": false,
+      "additionalProperties": true,
       "description": "Deployment strategy.",
       "required": [],
       "title": "deploymentStrategy",
@@ -139,8 +140,8 @@
           "type": "object"
         },
         "deploymentStrategy": {
-          "additionalProperties": false,
-          "description": " title: Deployment Strategy type: object @schema",
+          "additionalProperties": true,
+          "description": " title: Deployment Strategy type: object additionalProperties: true @schema",
           "required": [],
           "title": "Deployment Strategy",
           "type": "object"
@@ -319,8 +320,8 @@
           "type": "object"
         },
         "livenessProbe": {
-          "additionalProperties": false,
-          "description": " title: Liveness Probe type: object @schema",
+          "additionalProperties": true,
+          "description": " title: Liveness Probe type: object additionalProperties: true @schema",
           "required": [],
           "title": "Liveness Probe",
           "type": "object"
@@ -458,7 +459,7 @@
               "type": "string"
             },
             "existingSecret": {
-              "default": "ewq",
+              "default": "",
               "description": "Existing secret for OIDC",
               "required": [],
               "title": "existingSecret",
@@ -493,6 +494,13 @@
               "required": [],
               "title": "Application YAML",
               "type": "object"
+            },
+            "enabled": {
+              "default": false,
+              "description": "Enable Openfga configuration",
+              "required": [],
+              "title": "enabled",
+              "type": "boolean"
             },
             "existingSecret": {
               "default": "",
@@ -567,8 +575,8 @@
           "type": "object"
         },
         "readinessProbe": {
-          "additionalProperties": false,
-          "description": " title: Readiness Probe type: object @schema",
+          "additionalProperties": true,
+          "description": " title: Readiness Probe type: object additionalProperties: true @schema",
           "required": [],
           "title": "Readiness Probe",
           "type": "object"
@@ -713,7 +721,10 @@
           "description": "Match host for IngressRoute",
           "required": [],
           "title": "matchHost",
-          "type": "boolean"
+          "type": [
+            "boolean",
+            "null"
+          ]
         },
         "routes": {
           "description": "Routes for the IngressRoute",
@@ -765,8 +776,8 @@
       "title": "Job Settings"
     },
     "kafka": {
-      "additionalProperties": false,
-      "description": " title: Kafka Settings @schema",
+      "additionalProperties": true,
+      "description": " title: Kafka Settings type: object additionalProperties: true @schema",
       "properties": {
         "enabled": {
           "default": false,
@@ -777,11 +788,12 @@
         }
       },
       "required": [],
-      "title": "Kafka Settings"
+      "title": "Kafka Settings",
+      "type": "object"
     },
     "keycloakAdmin": {
-      "additionalProperties": false,
-      "description": " title: Keycloak Admin Settings @schema",
+      "additionalProperties": true,
+      "description": " title: Keycloak Admin Settings type: object additionalProperties: true @schema",
       "properties": {
         "enabled": {
           "default": false,
@@ -792,18 +804,19 @@
         }
       },
       "required": [],
-      "title": "Keycloak Admin Settings"
+      "title": "Keycloak Admin Settings",
+      "type": "object"
     },
     "livenessProbe": {
-      "additionalProperties": false,
+      "additionalProperties": true,
       "description": "Liveness probe configuration.",
       "required": [],
       "title": "livenessProbe",
       "type": "object"
     },
     "minio": {
-      "additionalProperties": false,
-      "description": " title: Minio Settings @schema",
+      "additionalProperties": true,
+      "description": " title: Minio Settings type: object additionalProperties: true @schema",
       "properties": {
         "enabled": {
           "default": false,
@@ -814,7 +827,8 @@
         }
       },
       "required": [],
-      "title": "Minio Settings"
+      "title": "Minio Settings",
+      "type": "object"
     },
     "nameOverride": {
       "default": "",
@@ -831,8 +845,8 @@
       "type": "object"
     },
     "oidc": {
-      "additionalProperties": false,
-      "description": " title: OIDC Settings type: object @schema",
+      "additionalProperties": true,
+      "description": " title: OIDC Settings type: object additionalProperties: true @schema",
       "properties": {
         "enabled": {
           "default": false,
@@ -847,8 +861,8 @@
       "type": "object"
     },
     "openfga": {
-      "additionalProperties": false,
-      "description": " title: OpenFGA Settings @schema",
+      "additionalProperties": true,
+      "description": " title: OpenFGA Settings type: object additionalProperties: true @schema",
       "properties": {
         "enabled": {
           "default": false,
@@ -859,7 +873,8 @@
         }
       },
       "required": [],
-      "title": "OpenFGA Settings"
+      "title": "OpenFGA Settings",
+      "type": "object"
     },
     "podAnnotations": {
       "additionalProperties": false,
@@ -889,9 +904,20 @@
         "interval": {
           "default": "15s",
           "description": "Scrape interval for PodMonitor",
+          "oneOf": [
+            {
+              "pattern": "s$",
+              "required": [],
+              "type": "string"
+            },
+            {
+              "pattern": "m$",
+              "required": [],
+              "type": "string"
+            }
+          ],
           "required": [],
-          "title": "interval",
-          "type": "integer"
+          "title": "interval"
         }
       },
       "required": [],
@@ -927,7 +953,7 @@
       "title": "Quarkus Settings"
     },
     "readinessProbe": {
-      "additionalProperties": false,
+      "additionalProperties": true,
       "description": "Readiness probe configuration.",
       "required": [],
       "title": "readinessProbe",
