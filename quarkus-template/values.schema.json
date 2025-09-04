@@ -875,6 +875,28 @@
       "title": "podLabels",
       "type": "object"
     },
+    "podMonitor": {
+      "additionalProperties": false,
+      "description": " title: PodMonitor settings @schema",
+      "properties": {
+        "enabled": {
+          "default": false,
+          "description": "Enable PodMonitor creation",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "interval": {
+          "default": "15s",
+          "description": "Scrape interval for PodMonitor",
+          "required": [],
+          "title": "interval",
+          "type": "integer"
+        }
+      },
+      "required": [],
+      "title": "PodMonitor settings"
+    },
     "podSecurityContext": {
       "additionalProperties": false,
       "description": "Security context for the pod.",

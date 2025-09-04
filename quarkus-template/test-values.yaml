@@ -38,3 +38,6 @@ oidc:
 keycloakAdmin:
   enabled: true
   serverUrl: https://obelisk.example.org/auth
+
+podMonitor:
+  enabled: true

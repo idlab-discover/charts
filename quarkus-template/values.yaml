@@ -474,6 +474,21 @@ quarkus:
   metricsPort: ""
 
 # @schema
+# title: PodMonitor settings
+# @schema
+podMonitor:
+  # @schema
+  # type: boolean
+  # @schema
+  # -- Enable PodMonitor creation
+  enabled: false
+  # @schema
+  # type: integer
+  # @schema
+  # -- Scrape interval for PodMonitor
+  interval: 15s
+
+# @schema
 # type: string
 # @schema
 # -- Additional application.properties entries

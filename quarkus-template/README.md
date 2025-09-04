@@ -144,6 +144,8 @@ The command removes all the Kubernetes components associated with the chart and 
 | openfga.enabled | bool | `false` | Enable OpenFGA client |
 | podAnnotations | object | `{}` | Annotations to add to the pod. |
 | podLabels | object | `{}` | Labels to add to the pod. |
+| podMonitor.enabled | bool | `false` | Enable PodMonitor creation |
+| podMonitor.interval | string | `"15s"` | Scrape interval for PodMonitor |
 | podSecurityContext | object | `{}` | Security context for the pod. |
 | quarkus | object | `{"httpPort":8080,"metricsPort":""}` | Tag for the image. Overrides the chart appVersion. tag: "" @schema title: Quarkus Settings @schema |
 | quarkus.httpPort | int | `8080` | Quarkus HTTP port |

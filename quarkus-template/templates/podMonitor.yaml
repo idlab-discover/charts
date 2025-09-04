@@ -1,0 +1,15 @@
+{{- if .Values.podMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: {{ $fullName }}
+  labels:
+    {{- include "quarkus-template.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: obelisk
+  podMetricsEndpoints:
+    - port: "metrics"
+      path: "/q/metrics"
+{{- end }}
