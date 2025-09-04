@@ -8,7 +8,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-       {{- include "quarkus-template.selectorLabels" . | nindent 6 }}     app.kubernetes.io/instance: obelisk
+      {{- include "quarkus-template.selectorLabels" . | nindent 6 }}
   podMetricsEndpoints:
     - port: "metrics"
       path: "/q/metrics"
