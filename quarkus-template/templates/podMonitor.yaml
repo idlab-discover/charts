@@ -2,7 +2,7 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
-  name: {{ $fullName }}
+  name: {{ include "quarkus-template.fullname" . }}
   labels:
     {{- include "quarkus-template.labels" . | nindent 4 }}
 spec:

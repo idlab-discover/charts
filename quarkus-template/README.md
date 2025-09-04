@@ -121,7 +121,10 @@ The command removes all the Kubernetes components associated with the chart and 
 | global.quarkus.metricsPort | string | `""` | Quarkus metrics port |
 | global.readinessProbe | object | `{}` |  |
 | global.truststore | object | `{}` |  |
-| image | string | `nil` |  |
+| image.name | string | `""` | Name of the image. Defaults to the chart name. |
+| image.pullPolicy | string | `""` | Image pull policy. |
+| image.registry | string | `""` | Registry for the image. Overrides the global registry. |
+| image.tag | string | `""` | Tag for the image. Overrides the chart appVersion. |
 | imagePullSecrets | list | `[]` | Secrets for pulling images from a private repository. |
 | ingress.annotations | object | `{}` | Annotations for the Ingress |
 | ingress.className | string | `""` | Ingress class name |
@@ -148,7 +151,6 @@ The command removes all the Kubernetes components associated with the chart and 
 | podMonitor.enabled | bool | `false` | Enable PodMonitor creation |
 | podMonitor.interval | string | `"15s"` | Scrape interval for PodMonitor |
 | podSecurityContext | object | `{}` | Security context for the pod. |
-| quarkus | object | `{"httpPort":8080,"metricsPort":""}` | Tag for the image. Overrides the chart appVersion. tag: "" @schema title: Quarkus Settings @schema |
 | quarkus.httpPort | int | `8080` | Quarkus HTTP port |
 | quarkus.metricsPort | string | `""` | Quarkus metrics port |
 | readinessProbe | object | `{}` | Readiness probe configuration. |

@@ -460,22 +460,22 @@ image:
   # type: string
   # @schema
   # -- Name of the image. Defaults to the chart name.
-  # name: ""
+  name: ""
   # @schema
   # type: string
   # @schema
   # -- Registry for the image. Overrides the global registry.
-  # registry: ""
+  registry: ""
   # @schema
   # type: string
   # @schema
   # -- Image pull policy.
-  # pullPolicy: ""
+  pullPolicy: ""
   # @schema
   # type: string
   # @schema
   # -- Tag for the image. Overrides the chart appVersion.
-  # tag: ""
+  tag: ""
 
 # @schema
 # title: Quarkus Settings

@@ -594,8 +594,38 @@
       "type": "object"
     },
     "image": {
-      "default": "",
+      "additionalProperties": false,
       "description": " title: Image Settings @schema",
+      "properties": {
+        "name": {
+          "default": "",
+          "description": "Name of the image. Defaults to the chart name.",
+          "required": [],
+          "title": "name",
+          "type": "string"
+        },
+        "pullPolicy": {
+          "default": "",
+          "description": "Image pull policy.",
+          "required": [],
+          "title": "pullPolicy",
+          "type": "string"
+        },
+        "registry": {
+          "default": "",
+          "description": "Registry for the image. Overrides the global registry.",
+          "required": [],
+          "title": "registry",
+          "type": "string"
+        },
+        "tag": {
+          "default": "",
+          "description": "Tag for the image. Overrides the chart appVersion.",
+          "required": [],
+          "title": "tag",
+          "type": "string"
+        }
+      },
       "required": [],
       "title": "Image Settings"
     },
@@ -932,7 +962,7 @@
     },
     "quarkus": {
       "additionalProperties": false,
-      "description": "Tag for the image. Overrides the chart appVersion. tag: \"\" @schema title: Quarkus Settings @schema",
+      "description": " title: Quarkus Settings @schema",
       "properties": {
         "httpPort": {
           "default": 8080,
