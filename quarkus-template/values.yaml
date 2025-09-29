@@ -314,6 +314,51 @@ global:
     # @schema
     applicationYaml: {}
   # @schema
+  # title: S3 Settings
+  # type: object
+  # @schema
+  s3:
+    # @schema
+    # type: string
+    # @schema
+    # -- S3 Endpoint URL (e.g. http://minio:9000)
+    endpoint: ""
+    # @schema
+    # type: string
+    # @schema
+    # -- S3 Region
+    region: "eu-west-1"
+    # @schema
+    # type: string
+    # @schema
+    # -- S3 access key
+    accessKey: ""
+    # @schema
+    # type: string
+    # @schema
+    # -- S3 secret key
+    secretKey: ""
+    # @schema
+    # type: string
+    # @schema
+    # -- Existing secret for S3 access
+    existingSecret: ""
+    # @schema
+    # type: string
+    # @schema
+    # -- Key for access key in existing secret
+    accessKeySecretKey: ""
+    # @schema
+    # type: string
+    # @schema
+    # -- Key for secret key in existing secret
+    secretKeySecretKey: ""
+    # @schema
+    # title: Application YAML
+    # type: object
+    # @schema
+    applicationYaml: {}
+  # @schema
   # title: Kafka Settings
   # type: object
   # @schema
@@ -376,6 +421,18 @@ keycloakAdmin:
   # type: boolean
   # @schema
   # -- Enable Keycloak Admin client
+  enabled: false
+
+# @schema
+# title: S3 Settings
+# type: object
+# additionalProperties: true
+# @schema
+s3:
+  # @schema
+  # type: boolean
+  # @schema
+  # -- Enable AWS S3 client
   enabled: false
 
 # @schema

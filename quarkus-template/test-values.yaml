@@ -21,6 +21,14 @@ global:
     authServerUrl: http://keycloak.keycloak/auth
     clientId: quarkus
     clientSecret: secret
+  s3:
+    endpoint: http://minio.minio.svc.cluster.local:9000
+    accessKey: minioadmin
+    secretKey: minioadmin
+    applicationYaml:
+      quarkus:
+        s3:
+          path-style-access: true
 ingressRoutes:
   enabled: true
   routes:
@@ -38,6 +46,8 @@ oidc:
 keycloakAdmin:
   enabled: true
   serverUrl: https://obelisk.example.org/auth
+s3:
+  enabled: true
 
 podMonitor:
   enabled: true

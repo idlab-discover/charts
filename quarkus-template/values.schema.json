@@ -581,6 +581,71 @@
           "title": "Readiness Probe",
           "type": "object"
         },
+        "s3": {
+          "additionalProperties": false,
+          "description": " title: S3 Settings type: object @schema",
+          "properties": {
+            "accessKey": {
+              "default": "",
+              "description": "S3 access key",
+              "required": [],
+              "title": "accessKey",
+              "type": "string"
+            },
+            "accessKeySecretKey": {
+              "default": "",
+              "description": "Key for access key in existing secret",
+              "required": [],
+              "title": "accessKeySecretKey",
+              "type": "string"
+            },
+            "applicationYaml": {
+              "additionalProperties": false,
+              "description": " title: Application YAML type: object @schema",
+              "required": [],
+              "title": "Application YAML",
+              "type": "object"
+            },
+            "endpoint": {
+              "default": "",
+              "description": "S3 Endpoint URL (e.g. http://minio:9000)",
+              "required": [],
+              "title": "endpoint",
+              "type": "string"
+            },
+            "existingSecret": {
+              "default": "",
+              "description": "Existing secret for S3 access",
+              "required": [],
+              "title": "existingSecret",
+              "type": "string"
+            },
+            "region": {
+              "default": "eu-west-1",
+              "description": "S3 Region",
+              "required": [],
+              "title": "region",
+              "type": "string"
+            },
+            "secretKey": {
+              "default": "",
+              "description": "S3 secret key",
+              "required": [],
+              "title": "secretKey",
+              "type": "string"
+            },
+            "secretKeySecretKey": {
+              "default": "",
+              "description": "Key for secret key in existing secret",
+              "required": [],
+              "title": "secretKeySecretKey",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "S3 Settings",
+          "type": "object"
+        },
         "truststore": {
           "additionalProperties": false,
           "description": " title: Truststore Settings type: object @schema",
@@ -1001,6 +1066,22 @@
       "description": "Resource requests and limits.",
       "required": [],
       "title": "resources",
+      "type": "object"
+    },
+    "s3": {
+      "additionalProperties": true,
+      "description": " title: S3 Settings type: object additionalProperties: true @schema",
+      "properties": {
+        "enabled": {
+          "default": false,
+          "description": "Enable AWS S3 client",
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [],
+      "title": "S3 Settings",
       "type": "object"
     },
     "securityContext": {

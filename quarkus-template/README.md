@@ -120,6 +120,14 @@ The command removes all the Kubernetes components associated with the chart and 
 | global.quarkus.logging.level | string | `"INFO"` | Logging level |
 | global.quarkus.metricsPort | string | `""` | Quarkus metrics port |
 | global.readinessProbe | object | `{}` |  |
+| global.s3.accessKey | string | `""` | S3 access key |
+| global.s3.accessKeySecretKey | string | `""` | Key for access key in existing secret |
+| global.s3.applicationYaml | object | `{}` |  |
+| global.s3.endpoint | string | `""` | S3 Endpoint URL (e.g. http://minio:9000) |
+| global.s3.existingSecret | string | `""` | Existing secret for S3 access |
+| global.s3.region | string | `"eu-west-1"` | S3 Region |
+| global.s3.secretKey | string | `""` | S3 secret key |
+| global.s3.secretKeySecretKey | string | `""` | Key for secret key in existing secret |
 | global.truststore | object | `{}` |  |
 | image.name | string | `""` | Name of the image. Defaults to the chart name. |
 | image.pullPolicy | string | `""` | Image pull policy. |
@@ -156,6 +164,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | readinessProbe | object | `{}` | Readiness probe configuration. |
 | replicaCount | int | `1` | Number of replicas for the deployment. |
 | resources | object | `{}` | Resource requests and limits. |
+| s3.enabled | bool | `false` | Enable AWS S3 client |
 | securityContext | object | `{}` | Security context for the container. |
 | service.port | int | `80` | Service port. |
 | service.type | string | `"ClusterIP"` | Service type. |

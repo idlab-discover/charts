@@ -28,6 +28,9 @@ data:
     {{- if and .Values.kafka.enabled .Values.global.kafka.applicationYaml}}
     {{- $appYaml = merge $appYaml .Values.global.kafka.applicationYaml }}
     {{- end }}
+    {{- if and .Values.s3.enabled .Values.global.s3.applicationYaml}}
+    {{- $appYaml = merge $appYaml .Values.global.s3.applicationYaml }}
+    {{- end }}
     {{- if and .Values.minio.enabled .Values.global.minio.applicationYaml}}
     {{- $appYaml = merge $appYaml .Values.global.minio.applicationYaml }}
     {{- end }}

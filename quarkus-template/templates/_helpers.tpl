@@ -148,6 +148,45 @@ The image reference for the Quarkus application
 {{- define "quarkus-template.clickhouse.envConfig.additional" -}}
 {{- end }}
 
+{{- define "quarkus-template.s3.envConfig" -}}
+{{- $endpoint := coalesce .Values.s3.endpoint .Values.global.s3.endpoint }}
+{{- $region := coalesce .Values.s3.region .Values.global.s3.region }}
+{{- $existingSecret := coalesce .Values.s3.existingSecret .Values.global.s3.existingSecret }}
+{{- $accessKeySecretKey := coalesce .Values.s3.accessKeySecretKey .Values.global.s3.accessKeySecretKey }}
+{{- $accessKey := coalesce .Values.s3.accessKey .Values.global.s3.accessKey }}
+{{- $secretKeySecretKey := coalesce .Values.s3.secretKeySecretKey .Values.global.s3.secretKeySecretKey }}
+{{- $secretKey := coalesce .Values.s3.secretKey .Values.global.s3.secretKey }}
+- name: QUARKUS_S3_ENDPOINT_OVERRIDE
+  value: "{{ $endpoint }}"
+- name: QUARKUS_S3_AWS_REGION
+  value: "{{ $region }}"
+- name: QUARKUS_S3_AWS_CREDENTIALS_TYPE
+  value: "env-variable"
+{{- if and $existingSecret $accessKeySecretKey }}
+- name: AWS_ACCESS_KEY_ID
+  valueFrom:
+    secretKeyRef:
+      name: {{ $existingSecret }}
+      key: {{ $accessKeySecretKey }}
+{{- else if $accessKey }}
+- name: AWS_ACCESS_KEY_ID
+  value: {{ $accessKey | quote }}
+{{- end }}
+{{- if and $existingSecret $secretKeySecretKey }}
+- name: AWS_SECRET_ACCESS_KEY
+  valueFrom:
+    secretKeyRef:
+      name: {{ $existingSecret }}
+      key: {{ $secretKeySecretKey }}
+{{- else if $secretKey }}
+- name: AWS_SECRET_ACCESS_KEY
+  value: {{ $secretKey | quote }}
+{{- end }}
+{{- end }}
+
+{{- define "quarkus-template.s3.envConfig.additional" -}}
+{{- end }}
+
 {{- define "quarkus-template.minio.envConfig" -}}
 {{- $useTls := coalesce .Values.minio.useTls .Values.global.minio.useTls }}
 {{- $host := coalesce .Values.minio.host .Values.global.minio.host }}
@@ -186,7 +225,6 @@ The image reference for the Quarkus application
 
 {{- define "quarkus-template.minio.envConfig.additional" -}}
 {{- end }}
-
 
 {{- define "quarkus-template.openfga.envConfig" -}}
 {{- $url := coalesce .Values.openfga.url .Values.global.openfga.url }}
