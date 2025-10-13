@@ -63,6 +63,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | autoscaling.targetCPUUtilizationPercentage | int | `80` | Target CPU utilization percentage |
 | clickhouse.enabled | bool | `false` | Enable Clickhouse client |
 | deploymentStrategy | object | `{}` | Deployment strategy. |
+| enabled | bool | `true` |  |
 | env | list | `[]` | Additional environment variables. |
 | fullnameOverride | string | `""` | Override the full name of the chart. |
 | global.applicationYaml | object | `{}` |  |

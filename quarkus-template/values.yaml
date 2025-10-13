@@ -406,6 +406,11 @@ global:
     applicationYaml: {}
 
 # @schema
+# title: enable the chart/template (used in subcharts)
+# type: boolean
+# @schema
+enabled: true
+# @schema
 # title: OIDC Settings
 # type: object
 # additionalProperties: true

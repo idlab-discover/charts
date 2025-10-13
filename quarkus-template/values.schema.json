@@ -82,6 +82,13 @@
       "title": "deploymentStrategy",
       "type": "object"
     },
+    "enabled": {
+      "default": true,
+      "description": " title: enable the chart/template (used in subcharts) type: boolean @schema",
+      "required": [],
+      "title": "enable the chart/template (used in subcharts)",
+      "type": "boolean"
+    },
     "env": {
       "description": "Additional environment variables.",
       "items": {
