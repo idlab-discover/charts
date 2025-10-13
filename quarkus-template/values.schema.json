@@ -17,7 +17,7 @@
       "type": "string"
     },
     "applicationYaml": {
-      "additionalProperties": false,
+      "additionalProperties": true,
       "description": "Additional application.yaml entries",
       "required": [],
       "title": "applicationYaml",
@@ -99,12 +99,12 @@
       "type": "string"
     },
     "global": {
-      "additionalProperties": false,
-      "description": " title: Global Settings type: object @schema",
+      "additionalProperties": true,
+      "description": " title: Global Settings type: object additionalProperties: true @schema",
       "properties": {
         "applicationYaml": {
-          "additionalProperties": false,
-          "description": " title: Application YAML type: object @schema",
+          "additionalProperties": true,
+          "description": " title: Application YAML type: object additionalProperties: true @schema",
           "required": [],
           "title": "Application YAML",
           "type": "object"
@@ -114,8 +114,8 @@
           "description": " title: Clickhouse Settings type: object @schema",
           "properties": {
             "applicationYaml": {
-              "additionalProperties": false,
-              "description": " title: Application YAML type: object @schema",
+              "additionalProperties": true,
+              "description": " title: Application YAML type: object additionalProperties: true @schema",
               "required": [],
               "title": "Application YAML",
               "type": "object"
@@ -232,12 +232,12 @@
           "type": "object"
         },
         "kafka": {
-          "additionalProperties": false,
-          "description": " title: Kafka Settings type: object @schema",
+          "additionalProperties": true,
+          "description": " title: Kafka Settings type: object additionalProperties: true @schema",
           "properties": {
             "applicationYaml": {
-              "additionalProperties": false,
-              "description": " title: Application YAML type: object @schema",
+              "additionalProperties": true,
+              "description": " title: Application YAML type: object additionalProperties: true @schema",
               "required": [],
               "title": "Application YAML",
               "type": "object"
@@ -345,8 +345,8 @@
               "type": "string"
             },
             "applicationYaml": {
-              "additionalProperties": false,
-              "description": " title: Application YAML type: object @schema",
+              "additionalProperties": true,
+              "description": " title: Application YAML type: object additionalProperties: true @schema",
               "required": [],
               "title": "Application YAML",
               "type": "object"
@@ -413,12 +413,12 @@
           "type": "object"
         },
         "oidc": {
-          "additionalProperties": false,
-          "description": " title: OIDC Settings type: object @schema",
+          "additionalProperties": true,
+          "description": " title: OIDC Settings type: object additionalProperties: true @schema",
           "properties": {
             "applicationYaml": {
-              "additionalProperties": false,
-              "description": " title: Application YAML type: object @schema",
+              "additionalProperties": true,
+              "description": " title: Application YAML type: object additionalProperties: true @schema",
               "required": [],
               "title": "Application YAML",
               "type": "object"
@@ -489,8 +489,8 @@
           "description": " title: OpenFGA Settings type: object @schema",
           "properties": {
             "applicationYaml": {
-              "additionalProperties": false,
-              "description": " title: Application YAML type: object @schema",
+              "additionalProperties": true,
+              "description": " title: Application YAML type: object additionalProperties: true @schema",
               "required": [],
               "title": "Application YAML",
               "type": "object"
@@ -567,7 +567,10 @@
               "description": "Quarkus metrics port",
               "required": [],
               "title": "metricsPort",
-              "type": "string"
+              "type": [
+                "string",
+                "integer"
+              ]
             }
           },
           "required": [],
@@ -582,8 +585,8 @@
           "type": "object"
         },
         "s3": {
-          "additionalProperties": false,
-          "description": " title: S3 Settings type: object @schema",
+          "additionalProperties": true,
+          "description": " title: S3 Settings type: object additionalProperties: true @schema",
           "properties": {
             "accessKey": {
               "default": "",
@@ -600,8 +603,8 @@
               "type": "string"
             },
             "applicationYaml": {
-              "additionalProperties": false,
-              "description": " title: Application YAML type: object @schema",
+              "additionalProperties": true,
+              "description": " title: Application YAML type: object additionalProperties: true @schema",
               "required": [],
               "title": "Application YAML",
               "type": "object"

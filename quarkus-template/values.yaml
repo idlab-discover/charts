@@ -3,6 +3,7 @@
 # @schema
 # title: Global Settings
 # type: object
+# additionalProperties: true
 # @schema
 global:
   # @schema
@@ -41,6 +42,7 @@ global:
   # @schema
   # title: Application YAML
   # type: object
+  # additionalProperties: true
   # @schema
   applicationYaml: {}
 
@@ -102,7 +104,7 @@ global:
     # -- Quarkus HTTP port
     httpPort: 8080
     # @schema
-    # type: string
+    # type: [string, integer]
     # @schema
     # -- Quarkus metrics port
     metricsPort: ""
@@ -126,6 +128,7 @@ global:
   # @schema
   # title: OIDC Settings
   # type: object
+  # additionalProperties: true
   # @schema
   oidc:
     # @schema
@@ -171,6 +174,7 @@ global:
     # @schema
     # title: Application YAML
     # type: object
+    # additionalProperties: true
     # @schema
     applicationYaml: {}
   # @schema
@@ -251,6 +255,7 @@ global:
     # @schema
     # title: Application YAML
     # type: object
+    # additionalProperties: true
     # @schema
     applicationYaml: {}
   # @schema
@@ -311,11 +316,13 @@ global:
     # @schema
     # title: Application YAML
     # type: object
+    # additionalProperties: true
     # @schema
     applicationYaml: {}
   # @schema
   # title: S3 Settings
   # type: object
+  # additionalProperties: true
   # @schema
   s3:
     # @schema
@@ -356,11 +363,13 @@ global:
     # @schema
     # title: Application YAML
     # type: object
+    # additionalProperties: true
     # @schema
     applicationYaml: {}
   # @schema
   # title: Kafka Settings
   # type: object
+  # additionalProperties: true
   # @schema
   kafka:
     # @schema
@@ -371,6 +380,7 @@ global:
     # @schema
     # title: Application YAML
     # type: object
+    # additionalProperties: true
     # @schema
     applicationYaml: {}
   # @schema
@@ -391,6 +401,7 @@ global:
     # @schema
     # title: Application YAML
     # type: object
+    # additionalProperties: true
     # @schema
     applicationYaml: {}
 
@@ -576,6 +587,7 @@ applicationProperties: ""
 
 # @schema
 # type: object
+# additionalProperties: true
 # @schema
 # -- Additional application.yaml entries
 applicationYaml: {}
