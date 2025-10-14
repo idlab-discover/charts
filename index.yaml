@@ -48,6 +48,16 @@ entries:
   quarkus-template:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2025-10-14T08:13:05.514490712Z"
+    description: A Helm chart for Kubernetes
+    digest: 19bc369d1d456d0980d1486d8f6740e1698357f5cefdb97e69e41a826f0fce37
+    name: quarkus-template
+    type: application
+    urls:
+    - https://github.com/idlab-discover/charts/releases/download/quarkus-template-0.6.3/quarkus-template-0.6.3.tgz
+    version: 0.6.3
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2025-10-13T17:51:25.939257918Z"
     description: A Helm chart for Kubernetes
     digest: bd39fcb09bd15a5cd0c8cc5c8e7f8c9dd98ae366f386808920798b8721d0f0b5
@@ -186,4 +196,4 @@ entries:
     urls:
     - https://github.com/idlab-discover/charts/releases/download/quarkus-template-0.2.0/quarkus-template-0.2.0.tgz
     version: 0.2.0
-generated: "2025-10-13T17:51:25.939357073Z"
+generated: "2025-10-14T08:13:05.514602672Z"
