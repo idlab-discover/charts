@@ -104,10 +104,10 @@ global:
     # -- Quarkus HTTP port
     httpPort: 8080
     # @schema
-    # type: [string, integer]
+    # type: ["null", integer]
     # @schema
     # -- Quarkus metrics port
-    metricsPort: ""
+    metricsPort: null
     # @schema
     # title: Logging Settings
     # type: object
@@ -269,10 +269,10 @@ global:
     # -- Minio host
     host: ""
     # @schema
-    # type: string
+    # type: ["null", integer]
     # @schema
     # -- Minio port
-    port: ""
+    port: null
     # @schema
     # type: boolean
     # @schema
@@ -394,10 +394,10 @@ global:
     # -- Clickhouse host
     host: ""
     # @schema
-    # type: string
+    # type: ["null", integer]
     # @schema
     # -- Clickhouse port
-    port: ""
+    port: null
     # @schema
     # title: Application YAML
     # type: object
@@ -560,10 +560,10 @@ quarkus:
   # -- Quarkus HTTP port
   httpPort: 8080
   # @schema
-  # type: string
+  # type: ["null", integer]
   # @schema
   # -- Quarkus metrics port
-  metricsPort: ""
+  metricsPort: null
 
 # @schema
 # title: PodMonitor settings

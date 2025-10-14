@@ -69,7 +69,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | global.applicationYaml | object | `{}` |  |
 | global.clickhouse.applicationYaml | object | `{}` |  |
 | global.clickhouse.host | string | `""` | Clickhouse host |
-| global.clickhouse.port | string | `""` | Clickhouse port |
+| global.clickhouse.port | string | `nil` | Clickhouse port |
 | global.deploymentStrategy | object | `{}` |  |
 | global.env | list | `[]` | Global environment variables |
 | global.host | string | `""` | Hostname for the ingress |
@@ -96,7 +96,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | global.minio.applicationYaml | object | `{}` |  |
 | global.minio.existingSecret | string | `""` | Existing secret for Minio |
 | global.minio.host | string | `""` | Minio host |
-| global.minio.port | string | `""` | Minio port |
+| global.minio.port | string | `nil` | Minio port |
 | global.minio.secretKey | string | `""` | Minio secret key |
 | global.minio.secretKeySecretKey | string | `""` | Key for secret key in existing secret |
 | global.minio.secure | bool | `true` | Use secure connection to Minio |
@@ -119,7 +119,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | global.openfga.url | string | `""` | OpenFGA API URL |
 | global.quarkus.httpPort | int | `8080` | Quarkus HTTP port |
 | global.quarkus.logging.level | string | `"INFO"` | Logging level |
-| global.quarkus.metricsPort | string | `""` | Quarkus metrics port |
+| global.quarkus.metricsPort | string | `nil` | Quarkus metrics port |
 | global.readinessProbe | object | `{}` |  |
 | global.s3.accessKey | string | `""` | S3 access key |
 | global.s3.accessKeySecretKey | string | `""` | Key for access key in existing secret |
@@ -161,7 +161,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | podMonitor.interval | string | `"15s"` | Scrape interval for PodMonitor |
 | podSecurityContext | object | `{}` | Security context for the pod. |
 | quarkus.httpPort | int | `8080` | Quarkus HTTP port |
-| quarkus.metricsPort | string | `""` | Quarkus metrics port |
+| quarkus.metricsPort | string | `nil` | Quarkus metrics port |
 | readinessProbe | object | `{}` | Readiness probe configuration. |
 | replicaCount | int | `1` | Number of replicas for the deployment. |
 | resources | object | `{}` | Resource requests and limits. |
