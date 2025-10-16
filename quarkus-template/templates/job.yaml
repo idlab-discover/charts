@@ -47,6 +47,10 @@ spec:
             {{- include "quarkus-template.minio.envConfig" . | nindent 12 }}
             {{- include "quarkus-template.minio.envConfig.additional" . | nindent 12}}
             {{- end }}
+            {{- if .Values.s3.enabled }}
+            {{- include "quarkus-template.s3.envConfig" . | nindent 12 }}
+            {{- include "quarkus-template.s3.envConfig.additional" . | nindent 12 }}
+            {{- end }}
             {{- if .Values.clickhouse.enabled -}}
             {{- include "quarkus-template.clickhouse.envConfig" . | nindent 12 }}
             {{- include "quarkus-template.clickhouse.envConfig.additional"  . | nindent 12}}
