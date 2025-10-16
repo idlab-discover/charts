@@ -122,6 +122,7 @@ global:
   # @schema
   # title: Truststore Settings
   # type: object
+  # additionalProperties: true
   # @schema
   truststore: {}
 
@@ -653,6 +654,7 @@ service:
 
 # @schema
 # title: IngressRoute Settings
+# additionalProperties: true
 # @schema
 ingressRoutes:
   # @schema

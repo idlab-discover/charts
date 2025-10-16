@@ -663,8 +663,8 @@
           "type": "object"
         },
         "truststore": {
-          "additionalProperties": false,
-          "description": " title: Truststore Settings type: object @schema",
+          "additionalProperties": true,
+          "description": " title: Truststore Settings type: object additionalProperties: true @schema",
           "required": [],
           "title": "Truststore Settings",
           "type": "object"
@@ -817,8 +817,8 @@
       "title": "Ingress Settings"
     },
     "ingressRoutes": {
-      "additionalProperties": false,
-      "description": " title: IngressRoute Settings @schema",
+      "additionalProperties": true,
+      "description": " title: IngressRoute Settings additionalProperties: true @schema",
       "properties": {
         "enabled": {
           "default": false,

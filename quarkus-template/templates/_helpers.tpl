@@ -160,26 +160,24 @@ The image reference for the Quarkus application
   value: "{{ $endpoint }}"
 - name: QUARKUS_S3_AWS_REGION
   value: "{{ $region }}"
-- name: QUARKUS_S3_AWS_CREDENTIALS_TYPE
-  value: "env-variable"
 {{- if and $existingSecret $accessKeySecretKey }}
-- name: AWS_ACCESS_KEY_ID
+- name: QUARKUS_S3_AWS_CREDENTIALS_STATIC_PROVIDER_ACCESS_KEY_ID
   valueFrom:
     secretKeyRef:
       name: {{ $existingSecret }}
       key: {{ $accessKeySecretKey }}
 {{- else if $accessKey }}
-- name: AWS_ACCESS_KEY_ID
+- name: QUARKUS_S3_AWS_CREDENTIALS_STATIC_PROVIDER_ACCESS_KEY_ID
   value: {{ $accessKey | quote }}
 {{- end }}
 {{- if and $existingSecret $secretKeySecretKey }}
-- name: AWS_SECRET_ACCESS_KEY
+- name: QUARKUS_S3_AWS_CREDENTIALS_STATIC_PROVIDER_SECRET_ACCESS_KEY
   valueFrom:
     secretKeyRef:
       name: {{ $existingSecret }}
       key: {{ $secretKeySecretKey }}
 {{- else if $secretKey }}
-- name: AWS_SECRET_ACCESS_KEY
+- name: QUARKUS_S3_AWS_CREDENTIALS_STATIC_PROVIDER_SECRET_ACCESS_KEY
   value: {{ $secretKey | quote }}
 {{- end }}
 {{- end }}
