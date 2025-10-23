@@ -12,11 +12,7 @@ metadata:
     {{- include "quarkus-template.labels" . | nindent 4 }}
 spec:
   entryPoints:
-    - {{- if eq $proxyMode "edge" }}
-      web
-      {{- else }}
-      {{ $tlsEnabled | ternary "websecure" "web" }}
-      {{- end }}
+    - {{ if eq $proxyMode "edge" }}web{{ else }}{{ $tlsEnabled | ternary "websecure" "web" }}{{ end }}
   routes:
     {{- range .Values.ingressRoutes.routes }}
     {{- $host := .host | default $.Values.global.host }}
