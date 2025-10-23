@@ -138,7 +138,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | ingress.annotations | object | `{}` | Annotations for the Ingress |
 | ingress.className | string | `""` | Ingress class name |
 | ingress.enabled | bool | `false` | Enable Ingress |
-| ingress.hosts | list | `[{"host":"chart-example.local","paths":[{"path":"/","pathType":"ImplementationSpecific"}]}]` | Hosts for the Ingress |
+| ingress.hosts | list | `[]` | Hosts for the Ingress |
 | ingress.tls | list | `[]` | TLS settings for the Ingress |
 | ingressRoutes.enabled | bool | `false` | Enable IngressRoute |
 | ingressRoutes.matchHost | string | `nil` | Match host for IngressRoute |

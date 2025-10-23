@@ -95,7 +95,7 @@ The image reference for the Quarkus application
 {{- end }}
 
 {{- define "quarkus-template.keycloakAdmin.envConfig" -}}
-{{- $enabled := .Values.keycloakAdmin.enabled }}
+{{- $enabled := ternary .Values.keycloakAdmin.enabled .Values.global.keycloakAdmin.enabled (hasKey .Values.keycloakAdmin "enabled") }}
 {{- $serverUrl := coalesce .Values.keycloakAdmin.serverUrl .Values.global.keycloakAdmin.serverUrl }}
 {{- $realm := coalesce .Values.keycloakAdmin.realm .Values.global.keycloakAdmin.realm }}
 {{- $existingSecret := coalesce .Values.keycloakAdmin.existingSecret .Values.global.keycloakAdmin.existingSecret }}
@@ -186,10 +186,10 @@ The image reference for the Quarkus application
 {{- end }}
 
 {{- define "quarkus-template.minio.envConfig" -}}
-{{- $useTls := coalesce .Values.minio.useTls .Values.global.minio.useTls }}
+{{- $useTls := ternary .Values.minio.useTls .Values.global.minio.useTls (hasKey .Values.minio "useTls") }}
 {{- $host := coalesce .Values.minio.host .Values.global.minio.host }}
 {{- $port := coalesce .Values.minio.port .Values.global.minio.port }}
-{{- $skipTlsVerify := coalesce .Values.minio.skipTlsVerify .Values.global.minio.skipTlsVerify }}
+{{- $skipTlsVerify := ternary .Values.minio.skipTlsVerify .Values.global.minio.skipTlsVerify (hasKey .Values.minio "skipTlsVerify") }}
 {{- $existingSecret := coalesce .Values.minio.existingSecret .Values.global.minio.existingSecret }}
 {{- $accessKeySecretKey := coalesce .Values.minio.accessKeySecretKey .Values.global.minio.accessKeySecretKey }}
 {{- $accessKey := coalesce .Values.minio.accessKey .Values.global.minio.accessKey }}

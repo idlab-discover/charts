@@ -21,6 +21,11 @@ global:
     authServerUrl: http://keycloak.keycloak/auth
     clientId: quarkus
     clientSecret: secret
+  minio:
+    useTls: false
+    host: slices-iri.slices.eu
+    accessKey: minioaccesskey
+    secretKey: miniosecretkey
   s3:
     endpoint: http://minio.minio.svc.cluster.local:9000
     accessKey: minioadmin
@@ -48,6 +53,7 @@ keycloakAdmin:
   serverUrl: https://obelisk.example.org/auth
 s3:
   enabled: true
-
+minio:
+  enabled: true
 podMonitor:
   enabled: true

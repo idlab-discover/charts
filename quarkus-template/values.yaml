@@ -701,11 +701,7 @@ ingress:
   # type: array
   # @schema
   # -- Hosts for the Ingress
-  hosts:
-    - host: chart-example.local
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
+  hosts: []
   # @schema
   # type: array
   # @schema

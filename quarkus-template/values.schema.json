@@ -747,56 +747,6 @@
         "hosts": {
           "description": "Hosts for the Ingress",
           "items": {
-            "anyOf": [
-              {
-                "additionalProperties": false,
-                "properties": {
-                  "host": {
-                    "default": "chart-example.local",
-                    "required": [],
-                    "title": "host",
-                    "type": "string"
-                  },
-                  "paths": {
-                    "items": {
-                      "anyOf": [
-                        {
-                          "additionalProperties": false,
-                          "properties": {
-                            "path": {
-                              "default": "/",
-                              "required": [],
-                              "title": "path",
-                              "type": "string"
-                            },
-                            "pathType": {
-                              "default": "ImplementationSpecific",
-                              "required": [],
-                              "title": "pathType",
-                              "type": "string"
-                            }
-                          },
-                          "required": [
-                            "path",
-                            "pathType"
-                          ],
-                          "type": "object"
-                        }
-                      ],
-                      "required": []
-                    },
-                    "required": [],
-                    "title": "paths",
-                    "type": "array"
-                  }
-                },
-                "required": [
-                  "host",
-                  "paths"
-                ],
-                "type": "object"
-              }
-            ],
             "required": []
           },
           "required": [],
