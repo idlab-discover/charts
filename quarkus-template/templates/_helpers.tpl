@@ -195,10 +195,12 @@ The image reference for the Quarkus application
 {{- $accessKey := coalesce .Values.minio.accessKey .Values.global.minio.accessKey }}
 {{- $secretKeySecretKey := coalesce .Values.minio.secretKeySecretKey .Values.global.minio.secretKeySecretKey }}
 {{- $secretKey := coalesce .Values.minio.secretKey .Values.global.minio.secretKey }}
-- name: QUARKUS_MINIO_URL
-  value: "{{ $useTls | ternary "https" "http" }}://{{ $host }}{{- if $port }}:{{ $port }}{{- end }}"
+- name: QUARKUS_MINIO_HOST
+  value: "{{ $host }}"
+- name: QUARKUS_MINIO_PORT
+  value: "{{ $port }}"
 - name: QUARKUS_MINIO_SECURE
-  value: {{ not $skipTlsVerify | quote }}
+  value: {{ $useTls }}
 {{- if and $existingSecret $accessKeySecretKey }}
 - name: QUARKUS_MINIO_ACCESS_KEY
   valueFrom:
