@@ -200,7 +200,7 @@ The image reference for the Quarkus application
 - name: QUARKUS_MINIO_PORT
   value: "{{ $port }}"
 - name: QUARKUS_MINIO_SECURE
-  value: {{ $useTls }}
+  value: "{{ $useTls }}"
 {{- if and $existingSecret $accessKeySecretKey }}
 - name: QUARKUS_MINIO_ACCESS_KEY
   valueFrom:
