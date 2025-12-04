@@ -61,6 +61,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | autoscaling.maxReplicas | int | `100` | Maximum number of replicas |
 | autoscaling.minReplicas | int | `1` | Minimum number of replicas |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` | Target CPU utilization percentage |
+| autoscaling.targetMemoryUtilizationPercentage | int | `80` | Target Memory utilization percentage |
 | clickhouse.enabled | bool | `false` | Enable Clickhouse client |
 | deploymentStrategy | object | `{}` | Deployment strategy. |
 | enabled | bool | `true` |  |

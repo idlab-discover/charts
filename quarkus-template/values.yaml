@@ -729,6 +729,7 @@ readinessProbe: {}
 
 # @schema
 # title: Autoscaling Settings
+# additionalProperties: true
 # @schema
 autoscaling:
   # @schema
@@ -751,6 +752,11 @@ autoscaling:
   # @schema
   # -- Target CPU utilization percentage
   targetCPUUtilizationPercentage: 80
+  # @schema
+  # type: integer
+  # @schema
+  # -- Target Memory utilization percentage
+  targetMemoryUtilizationPercentage: 80
 
 # @schema
 # type: object

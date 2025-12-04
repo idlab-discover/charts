@@ -24,8 +24,8 @@
       "type": "object"
     },
     "autoscaling": {
-      "additionalProperties": false,
-      "description": " title: Autoscaling Settings @schema",
+      "additionalProperties": true,
+      "description": " title: Autoscaling Settings additionalProperties: true @schema",
       "properties": {
         "enabled": {
           "default": false,
@@ -53,6 +53,13 @@
           "description": "Target CPU utilization percentage",
           "required": [],
           "title": "targetCPUUtilizationPercentage",
+          "type": "integer"
+        },
+        "targetMemoryUtilizationPercentage": {
+          "default": 80,
+          "description": "Target Memory utilization percentage",
+          "required": [],
+          "title": "targetMemoryUtilizationPercentage",
           "type": "integer"
         }
       },
