@@ -1038,7 +1038,7 @@
       "type": "integer"
     },
     "resources": {
-      "additionalProperties": false,
+      "additionalProperties": true,
       "description": "Resource requests and limits.",
       "required": [],
       "title": "resources",

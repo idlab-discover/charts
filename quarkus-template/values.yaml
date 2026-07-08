@@ -710,6 +710,7 @@ ingress:
 
 # @schema
 # type: object
+# additionalProperties: true
 # @schema
 # -- Resource requests and limits.
 resources: {}
