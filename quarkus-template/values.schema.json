@@ -3,7 +3,7 @@
   "additionalProperties": false,
   "properties": {
     "affinity": {
-      "additionalProperties": false,
+      "additionalProperties": true,
       "description": "Affinity configuration.",
       "required": [],
       "title": "affinity",
@@ -235,6 +235,22 @@
               "required": [],
               "title": "proxy",
               "type": "string"
+            },
+            "tls": {
+              "additionalProperties": false,
+              "description": " title: TLS Settings type: object @schema",
+              "properties": {
+                "secretName": {
+                  "default": "",
+                  "description": "Secret name for TLS certificate",
+                  "required": [],
+                  "title": "secretName",
+                  "type": "string"
+                }
+              },
+              "required": [],
+              "title": "TLS Settings",
+              "type": "object"
             },
             "tlsEnabled": {
               "default": false,
@@ -731,7 +747,7 @@
       "description": " title: Ingress Settings @schema",
       "properties": {
         "annotations": {
-          "additionalProperties": false,
+          "additionalProperties": true,
           "description": "Annotations for the Ingress",
           "required": [],
           "title": "annotations",
@@ -906,7 +922,7 @@
       "type": "string"
     },
     "nodeSelector": {
-      "additionalProperties": false,
+      "additionalProperties": true,
       "description": "Node selector configuration.",
       "required": [],
       "title": "nodeSelector",
@@ -945,14 +961,14 @@
       "type": "object"
     },
     "podAnnotations": {
-      "additionalProperties": false,
+      "additionalProperties": true,
       "description": "Annotations to add to the pod.",
       "required": [],
       "title": "podAnnotations",
       "type": "object"
     },
     "podLabels": {
-      "additionalProperties": false,
+      "additionalProperties": true,
       "description": "Labels to add to the pod.",
       "required": [],
       "title": "podLabels",
@@ -992,7 +1008,7 @@
       "title": "PodMonitor settings"
     },
     "podSecurityContext": {
-      "additionalProperties": false,
+      "additionalProperties": true,
       "description": "Security context for the pod.",
       "required": [],
       "title": "podSecurityContext",
@@ -1061,7 +1077,7 @@
       "type": "object"
     },
     "securityContext": {
-      "additionalProperties": false,
+      "additionalProperties": true,
       "description": "Security context for the container.",
       "required": [],
       "title": "securityContext",

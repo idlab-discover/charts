@@ -1,9 +1,38 @@
+# yaml-language-server: $schema=values.schema.json
+# Comprehensive test values file that exercises ALL schema properties
+
+# Global settings
 global:
   host: example.org
   ingressRoutes:
     matchHost: true
+    tlsEnabled: true
+    proxy: "http"
+    tls:
+      secretName: my-tls-secret
+  env:
+    - name: GLOBAL_VAR
+      value: "test-value"
+    - name: GLOBAL_SECRET
+      valueFrom:
+        secretKeyRef:
+          name: my-secret
+          key: key
+  applicationYaml:
+    quarkus:
+      http:
+        cors: true
+  image:
+    registry: "docker.io/myorg"
+    tag: "v1.0.0"
+    pullPolicy: Always
+  imagePullSecrets:
+    - name: my-registry-secret
   deploymentStrategy:
-    type: Recreate
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
   livenessProbe:
     initialDelaySeconds: 30
     periodSeconds: 10
@@ -12,56 +41,282 @@ global:
     failureThreshold: 3
     httpGet:
       path: /q/health/live
-      port: metrics
+      port: http
+  readinessProbe:
+    initialDelaySeconds: 5
+    periodSeconds: 5
+    httpGet:
+      path: /q/health/ready
+      port: http
+  quarkus:
+    httpPort: 8080
+    metricsPort: 9090
+    logging:
+      level: DEBUG
+  truststore:
+    enabled: true
+    secretName: oidc-truststore
+  oidc:
+    authServerUrl: https://auth.example.org/realms/test
+    clientId: quarkus-client
+    clientSecret: super-secret
+    realm: test
+    existingSecret: ""
+    clientIdSecretKey: client-id
+    clientSecretSecretKey: client-secret
+    realmSecretKey: ""
+    applicationYaml:
+      quarkus:
+        oidc:
+          token:
+            issuer: https://auth.example.org
+  keycloakAdmin:
+    enabled: true
+    serverUrl: https://keycloak.example.org
+    username: admin
+    password: admin-password
+    realm: master
+    existingSecret: ""
+    usernameSecretKey: ""
+    passwordSecretKey: ""
   openfga:
     enabled: true
-    url: "https://openfga.example.org"
-    storeId: "default-store"
-  oidc:
-    authServerUrl: http://keycloak.keycloak/auth
-    clientId: quarkus
-    clientSecret: secret
+    url: https://openfga.example.org
+    storeId: default-store
+    existingSecret: ""
+    storeIdSecretKey: ""
+    applicationYaml:
+      quarkus:
+        openfga:
+          timeout: 5s
   minio:
-    useTls: false
-    host: slices-iri.slices.eu
-    accessKey: minioaccesskey
-    secretKey: miniosecretkey
+    host: minio.example.org
+    port: 9000
+    secure: true
+    skipTlsVerify: false
+    useTls: true
+    accessKey: minioaccess
+    secretKey: miniosecret
+    existingSecret: ""
+    accessKeySecretKey: ""
+    secretKeySecretKey: ""
+    applicationYaml:
+      quarkus:
+        minio:
+          region: eu-west-1
   s3:
-    endpoint: http://minio.minio.svc.cluster.local:9000
-    accessKey: minioadmin
-    secretKey: minioadmin
+    endpoint: https://s3.example.org
+    region: eu-west-1
+    accessKey: s3access
+    secretKey: s3secret
+    existingSecret: ""
+    accessKeySecretKey: ""
+    secretKeySecretKey: ""
     applicationYaml:
       quarkus:
         s3:
           path-style-access: true
-ingressRoutes:
-  enabled: true
-  routes:
-    - match: "PathPrefix(`/[^/]+/changes`)"
-      middlewares:
-        - name: StripPrefix
-    - match: "PathPrefix(`/[^/]+/slices`)"
-      middlewares:
-        - name: StripPrefix
-openfga:
-  enabled: true
+  kafka:
+    bootstrapServers: kafka-0.kafka:9092,kafka-1.kafka:9092
+    applicationYaml:
+      kafka:
+        security:
+          protocol: SASL_SSL
+  clickhouse:
+    host: clickhouse.example.org
+    port: 9000
+    applicationYaml:
+      quarkus:
+        datasource:
+          clickhouse:
+            jdbc:
+              driver: com.clickhouse.jdbc.ClickHouseDriver
+
+# Top-level feature toggles
+enabled: true
+
 oidc:
   enabled: true
   authServerUrl: https://obelisk.example.org/auth/realms/obelisk
+
 keycloakAdmin:
   enabled: true
   serverUrl: https://obelisk.example.org/auth
+
 s3:
   enabled: true
+  bucket: my-bucket
+
 minio:
   enabled: true
+  bucket: my-minio-bucket
+
+kafka:
+  enabled: true
+  topic: my-topic
+
+clickhouse:
+  enabled: true
+  database: analytics
+
+openfga:
+  enabled: true
+  modelId: model-123
+
+# Job configuration
+job:
+  enabled: false
+  backoffLimit: 3
+  restartPolicy: Never
+
+# Deployment settings
+replicaCount: 2
+
+image:
+  name: my-quarkus-app
+  registry: docker.io/myorg
+  pullPolicy: Always
+  tag: v2.0.0
+
+quarkus:
+  httpPort: 8080
+  metricsPort: 9090
+
+# Monitoring
 podMonitor:
   enabled: true
+  interval: 30s
 
+# Application configuration
+applicationProperties: |
+  quarkus.log.level=INFO
+  quarkus.http.cors=true
+
+applicationYaml:
+  quarkus:
+    http:
+      port: 8080
+    log:
+      console:
+        format: "%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{2.}] (%t) %s%e%n"
+
+# Image pull secrets
+imagePullSecrets:
+  - name: registry-secret
+
+# Name overrides
+nameOverride: my-app
+fullnameOverride: my-full-app-name
+
+# Pod metadata
+podAnnotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/port: "9090"
+  prometheus.io/path: "/q/metrics"
+  custom.annotation/example: "value"
+
+podLabels:
+  app.kubernetes.io/component: backend
+  app.kubernetes.io/part-of: my-system
+  custom-label: custom-value
+
+# Security contexts
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  runAsGroup: 1000
+  fsGroup: 1000
+  seccompProfile:
+    type: RuntimeDefault
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 1000
+  capabilities:
+    drop:
+      - ALL
+
+# Service configuration
+service:
+  type: ClusterIP
+  port: 80
+
+# IngressRoute (Traefik)
+ingressRoutes:
+  enabled: true
+  matchHost: true
+  tlsEnabled: true
+  routes:
+    - match: "PathPrefix(`/api/v1`)"
+      middlewares:
+        - name: StripPrefix
+    - match: "PathPrefix(`/api/v2`)"
+      middlewares:
+        - name: StripPrefix
+        - name: RateLimit
+
+# Ingress (standard K8s)
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  hosts:
+    - host: api.example.org
+      paths:
+        - path: /
+          pathType: Prefix
+    - host: api2.example.org
+      paths:
+        - path: /v1
+          pathType: Prefix
+        - path: /v2
+          pathType: Exact
+  tls:
+    - secretName: api-tls-secret
+      hosts:
+        - api.example.org
+    - secretName: api2-tls-secret
+      hosts:
+        - api2.example.org
+
+# Resources
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+# Probes
+livenessProbe:
+  httpGet:
+    path: /q/health/live
+    port: http
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+
+readinessProbe:
+  httpGet:
+    path: /q/health/ready
+    port: http
+  initialDelaySeconds: 5
+  periodSeconds: 5
+  timeoutSeconds: 3
+  successThreshold: 1
+
+# Autoscaling
 autoscaling:
   enabled: true
   minReplicas: 2
-  maxReplicas: 5
+  maxReplicas: 10
   targetCPUUtilizationPercentage: 70
   targetMemoryUtilizationPercentage: 80
   behavior:
@@ -78,6 +333,108 @@ autoscaling:
           value: 100
           periodSeconds: 30
         - type: Pods
-          value: 2
+          value: 4
           periodSeconds: 30
       selectPolicy: Max
+
+# Deployment strategy
+deploymentStrategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 25%
+    maxUnavailable: 0
+
+# Environment variables
+env:
+  - name: MY_VAR
+    value: my-value
+  - name: SECRET_VAR
+    valueFrom:
+      secretKeyRef:
+        name: my-secret
+        key: password
+  - name: CONFIGMAP_VAR
+    valueFrom:
+      configMapKeyRef:
+        name: my-config
+        key: setting
+  - name: FIELD_REF
+    valueFrom:
+      fieldRef:
+        fieldPath: metadata.name
+
+# Volumes
+volumes:
+  - name: config-vol
+    configMap:
+      name: my-config
+  - name: secret-vol
+    secret:
+      secretName: my-secret
+  - name: empty-dir
+    emptyDir: {}
+  - name: pvc-vol
+    persistentVolumeClaim:
+      claimName: my-pvc
+
+# Volume mounts
+volumeMounts:
+  - name: config-vol
+    mountPath: /etc/config
+    readOnly: true
+  - name: secret-vol
+    mountPath: /etc/secrets
+    readOnly: true
+  - name: empty-dir
+    mountPath: /tmp/cache
+
+# Node selector
+nodeSelector:
+  kubernetes.io/os: linux
+  node-type: worker
+  topology.kubernetes.io/zone: eu-west-1a
+
+# Tolerations
+tolerations:
+  - key: dedicated
+    operator: Equal
+    value: app
+    effect: NoSchedule
+  - key: node.kubernetes.io/not-ready
+    operator: Exists
+    effect: NoExecute
+    tolerationSeconds: 300
+
+# Affinity
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: topology.kubernetes.io/zone
+              operator: In
+              values:
+                - eu-west-1a
+                - eu-west-1b
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        preference:
+          matchExpressions:
+            - key: node-type
+              operator: In
+              values:
+                - high-memory
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: my-app
+          topologyKey: kubernetes.io/hostname
+  podAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchLabels:
+            app.kubernetes.io/name: cache
+        topologyKey: kubernetes.io/hostname

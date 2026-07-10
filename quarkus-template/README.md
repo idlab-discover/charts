@@ -80,6 +80,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | global.imagePullSecrets | list | `[]` | Global image pull secrets |
 | global.ingressRoutes.matchHost | bool | `false` | Automatically create IngressRoute for the host |
 | global.ingressRoutes.proxy | string | `"none"` | Proxy protocol for the IngressRoute |
+| global.ingressRoutes.tls.secretName | string | `""` | Secret name for TLS certificate |
 | global.ingressRoutes.tlsEnabled | bool | `false` | Enable TLS for the IngressRoute |
 | global.kafka.applicationYaml | object | `{}` |  |
 | global.kafka.bootstrapServers | string | `""` | Kafka bootstrap servers |

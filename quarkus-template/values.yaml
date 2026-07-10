@@ -31,6 +31,16 @@ global:
     # @schema
     # -- Proxy protocol for the IngressRoute
     proxy: "none"
+    # @schema
+    # title: TLS Settings
+    # type: object
+    # @schema
+    tls:
+      # @schema
+      # type: string
+      # @schema
+      # -- Secret name for TLS certificate
+      secretName: ""
 
   # @schema
   # title: Environment Variables
@@ -616,23 +626,27 @@ fullnameOverride: ""
 
 # @schema
 # type: object
+# additionalProperties: true
 # @schema
 # -- Annotations to add to the pod.
 podAnnotations: {}
 # @schema
 # type: object
+# additionalProperties: true
 # @schema
 # -- Labels to add to the pod.
 podLabels: {}
 
 # @schema
 # type: object
+# additionalProperties: true
 # @schema
 # -- Security context for the pod.
 podSecurityContext: {}
 
 # @schema
 # type: object
+# additionalProperties: true
 # @schema
 # -- Security context for the container.
 securityContext: {}
@@ -694,6 +708,7 @@ ingress:
   className: ""
   # @schema
   # type: object
+  # additionalProperties: true
   # @schema
   # -- Annotations for the Ingress
   annotations: {}
@@ -786,6 +801,7 @@ volumeMounts: []
 
 # @schema
 # type: object
+# additionalProperties: true
 # @schema
 # -- Node selector configuration.
 nodeSelector: {}
@@ -798,6 +814,7 @@ tolerations: []
 
 # @schema
 # type: object
+# additionalProperties: true
 # @schema
 # -- Affinity configuration.
 affinity: {}
